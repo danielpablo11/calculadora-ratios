@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calculadora PER y Ratios</title>
+<meta name="theme-color" content="#1d4ed8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ratios">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabecera fija, contenido en una columna, navegación inferior de 4 pestañas */
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --ink: #141a2a;
+  --muted: #5d667c;
+  --line: #dde2ec;
+  --accent: #1d4ed8;
+  --accent-soft: #e4ebfd;
+  --good: #0f7a4a;
+  --good-soft: #def3e8;
+  --mid: #8a5a00;
+  --mid-soft: #fbefcf;
+  --warn: #b3261e;
+  --warn-soft: #fbe3e1;
+  --font: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1424; --surface: #181f35; --ink: #e8ecf8; --muted: #9aa4be; --line: #29324d;
+    --accent: #7ea2ff; --accent-soft: #1f2b52;
+    --good: #5fd39a; --good-soft: #163a2c; --mid: #f0c25a; --mid-soft: #3d3216;
+    --warn: #ff8f86; --warn-soft: #4a1e1b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1424; --surface: #181f35; --ink: #e8ecf8; --muted: #9aa4be; --line: #29324d;
+  --accent: #7ea2ff; --accent-soft: #1f2b52;
+  --good: #5fd39a; --good-soft: #163a2c; --mid: #f0c25a; --mid-soft: #3d3216;
+  --warn: #ff8f86; --warn-soft: #4a1e1b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); -webkit-text-size-adjust: 100%; }
+body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+header { padding: calc(14px + env(safe-area-inset-top)) 16px 4px; max-width: 560px; margin: 0 auto; }
+h1 { font-size: 1.25rem; font-weight: 600; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); font-size: .82rem; margin: 2px 0 0; }
+main { max-width: 560px; margin: 0 auto; padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 14px; }
+.banner { display: flex; gap: 10px; align-items: center; justify-content: space-between; background: var(--accent-soft); border-radius: 12px; padding: 10px 12px; font-size: .82rem; }
+.banner button { white-space: nowrap; }
+button { font: inherit; cursor: pointer; }
+.btn { border: 1px solid var(--accent); background: var(--surface); color: var(--accent); border-radius: 9px; padding: 7px 11px; font-weight: 500; font-size: .82rem; }
+.btn:focus-visible, .tab:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.card h2 { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+.hero { display: flex; flex-direction: column; gap: 4px; }
+.hero .lab { font-size: .85rem; color: var(--muted); }
+.hero .big { font-family: var(--mono); font-size: 2.6rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.hero .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.field label { font-size: .76rem; color: var(--muted); }
+.field input { width: 100%; font: inherit; font-family: var(--mono); font-size: 1rem; padding: 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font-variant-numeric: tabular-nums; }
+.field input::placeholder { color: var(--muted); opacity: .6; }
+.res { display: flex; flex-direction: column; }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 10px 0; border-top: 1px solid var(--line); align-items: center; }
+.item:first-child { border-top: 0; padding-top: 0; }
+.item .n { font-size: .9rem; font-weight: 500; }
+.item .v { font-family: var(--mono); font-weight: 600; font-size: 1.05rem; text-align: right; font-variant-numeric: tabular-nums; }
+.item .f { grid-column: 1 / -1; font-size: .76rem; color: var(--muted); }
+.item .v.none { color: var(--muted); font-weight: 500; font-size: .9rem; }
+.pill { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.mid { background: var(--mid-soft); color: var(--mid); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.note { font-size: .74rem; color: var(--muted); margin: 0; line-height: 1.45; }
+nav { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); }
+nav .in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.tab { border: 0; background: transparent; color: var(--muted); border-radius: 10px; padding: 11px 4px; font-size: .8rem; font-weight: 500; }
+.tab[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) { .big { transition: color .2s; } }
+.head-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.btn.solid { background: var(--accent); color: var(--surface); display: inline-flex; align-items: center; gap: 6px; }
+.btn svg { width: 16px; height: 16px; }
+.btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.banner { flex-wrap: wrap; }
+
+/* Hoja de importación */
+.sheet { position: fixed; inset: 0; z-index: 50; background: rgba(8, 12, 24, .5); display: none; align-items: flex-end; justify-content: center; }
+.sheet.open { display: flex; }
+.sheet .pane { background: var(--surface); width: 100%; max-width: 560px; max-height: 90%; overflow-y: auto; border-radius: 18px 18px 0 0; padding: 16px 16px calc(18px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; }
+.pane h3 { margin: 0; font-size: 1.05rem; }
+.x { border: 0; background: var(--bg); color: var(--ink); width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; line-height: 1; }
+.drop { border: 1.5px dashed var(--accent); border-radius: 12px; padding: 14px 12px; background: var(--accent-soft); color: var(--accent); font-weight: 600; font-size: .9rem; display: flex; flex-direction: column; gap: 8px; }
+.drop small { display: block; font-weight: 400; color: var(--muted); }
+.drop input[type=file] { width: 100%; font: inherit; font-size: .85rem; color: var(--ink); }
+.drop input[type=file]::file-selector-button { font: inherit; font-weight: 600; border: 0; background: var(--accent); color: var(--surface); padding: 10px 14px; border-radius: 9px; margin-right: 10px; cursor: pointer; }
+textarea { width: 100%; min-height: 90px; font: inherit; font-size: .85rem; padding: 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); resize: vertical; }
+select { font: inherit; padding: 8px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.status { font-size: .82rem; padding: 8px 10px; border-radius: 9px; background: var(--bg); }
+.status.err { background: var(--warn-soft); color: var(--warn); }
+.imp-row { display: grid; grid-template-columns: auto 1fr 112px; gap: 4px 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+.imp-row input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
+.imp-row .nm { font-size: .86rem; font-weight: 500; }
+.imp-row .src { grid-column: 2 / -1; font-size: .72rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.imp-row input[type=text] { width: 100%; font-family: var(--mono); font-size: .92rem; padding: 7px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); text-align: right; }
+.miss { font-size: .76rem; color: var(--muted); }
+
+/* Widget flotante */
+.fab { position: fixed; right: 16px; bottom: calc(86px + env(safe-area-inset-bottom)); z-index: 40; width: 58px; height: 58px; border-radius: 50%; border: 0; background: var(--accent); color: var(--surface); box-shadow: 0 6px 18px rgba(10, 20, 60, .35); display: flex; align-items: center; justify-content: center; touch-action: none; }
+.fab svg { width: 26px; height: 26px; }
+.fab:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.qc { position: fixed; right: 12px; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 45; width: min(340px, calc(100% - 24px)); background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 12px 34px rgba(10, 20, 60, .3); padding: 12px; display: none; flex-direction: column; gap: 10px; max-height: calc(100% - 110px); overflow-y: auto; }
+.qc.open { display: flex; }
+.qc-top { display: flex; gap: 8px; align-items: center; }
+.seg { flex: 1; display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); border-radius: 10px; padding: 3px; }
+.seg button { border: 0; background: transparent; color: var(--muted); padding: 7px; border-radius: 8px; font-size: .82rem; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.disp { background: var(--bg); border-radius: 12px; padding: 10px 12px; text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.disp .hist { font-size: .72rem; color: var(--muted); min-height: 1em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.disp .ex { font-size: 1.5rem; font-weight: 600; word-break: break-all; min-height: 1.3em; }
+.disp .pre { font-size: .85rem; color: var(--muted); min-height: 1.1em; }
+.keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.keys button { border: 0; border-radius: 10px; padding: 13px 0; font-family: var(--mono); font-size: 1.1rem; font-weight: 600; background: var(--bg); color: var(--ink); }
+.keys button.op { background: var(--accent-soft); color: var(--accent); }
+.keys button.eq { grid-column: 1 / -1; background: var(--accent); color: var(--surface); }
+.keys button:active { filter: brightness(.92); }
+.quick { display: flex; flex-direction: column; gap: 10px; }
+.qbox { border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+.qbox b { font-size: .82rem; }
+.qbox .two { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.qbox input { width: 100%; font-family: var(--mono); font-size: .95rem; padding: 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.qbox .out { font-family: var(--mono); font-weight: 600; font-size: 1.05rem; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(150px + env(safe-area-inset-bottom)); z-index: 60; background: var(--ink); color: var(--bg); padding: 10px 14px; border-radius: 12px; font-size: .85rem; max-width: calc(100% - 32px); display: none; }
+.toast.show { display: block; }
+</style>
+</head>
+<body>
+<header>
+  <div class="head-row">
+    <h1>Calculadora PER y ratios</h1>
+    <button class="btn solid" id="openImport" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg>Subir</button>
+  </div>
+  <p class="sub">Sube la cuenta de resultados o escribe los datos. Usa coma para decimales.</p>
+</header>
+<main id="main"></main>
+<nav><div class="in" role="tablist" id="tabs"></div></nav>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="pane">
+    <div class="head-row"><h3 id="sheetTitle">Subir cuenta de resultados</h3><button class="x" id="closeImport" type="button" aria-label="Cerrar">×</button></div>
+    <div class="drop">
+      <label for="fileIn">Elige uno o varios archivos</label>
+      <input type="file" id="fileIn" multiple>
+      <small>Excel (.xlsx, .xls), CSV, PDF con texto o .txt. Puedes elegir la cuenta de resultados y el balance a la vez.</small>
+    </div>
+    <div class="field"><label for="pasteIn">O pega aquí el texto copiado del informe o de Excel</label>
+      <textarea id="pasteIn" placeholder="Importe neto de la cifra de negocios   15.000   14.200&#10;Resultado de explotación   3.200   2.900&#10;Resultado del ejercicio   2.000   1.800"></textarea></div>
+    <button class="btn" id="analyzeText" type="button">Analizar texto pegado</button>
+    <div id="impOut"></div>
+  </div>
+</div>
+
+<button class="fab" id="fab" type="button" aria-label="Abrir calculadora rápida" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M8.5 6.5h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h.01M15.5 18h.01"/></svg></button>
+<div class="qc" id="qc" role="dialog" aria-label="Calculadora rápida">
+  <div class="qc-top">
+    <div class="seg"><button type="button" id="segCalc" aria-pressed="true">Calculadora</button><button type="button" id="segQuick" aria-pressed="false">Rápidos</button></div>
+    <button class="x" id="qcClose" type="button" aria-label="Cerrar calculadora">×</button>
+  </div>
+  <div id="qcCalc">
+    <div class="disp"><div class="hist" id="cHist"></div><div class="ex" id="cEx">0</div><div class="pre" id="cPre"></div></div>
+    <div class="keys" id="keys" style="margin-top:10px"></div>
+  </div>
+  <div id="qcQuick" class="quick" hidden>
+    <div class="qbox"><b>PER</b><div class="two"><input id="q1a" inputmode="decimal" placeholder="Precio" aria-label="Precio"><input id="q1b" inputmode="decimal" placeholder="BPA" aria-label="BPA"></div><span class="out" id="q1o">—</span></div>
+    <div class="qbox"><b>Precio objetivo (BPA × PER)</b><div class="two"><input id="q2a" inputmode="decimal" placeholder="BPA" aria-label="BPA"><input id="q2b" inputmode="decimal" placeholder="PER objetivo" aria-label="PER objetivo"></div><span class="out" id="q2o">—</span></div>
+    <div class="qbox"><b>Variación %</b><div class="two"><input id="q3a" inputmode="decimal" placeholder="De" aria-label="Valor inicial"><input id="q3b" inputmode="decimal" placeholder="A" aria-label="Valor final"></div><span class="out" id="q3o">—</span></div>
+    <div class="qbox"><b>Rentabilidad por dividendo</b><div class="two"><input id="q4a" inputmode="decimal" placeholder="Dividendo" aria-label="Dividendo"><input id="q4b" inputmode="decimal" placeholder="Precio" aria-label="Precio"></div><span class="out" id="q4o">—</span></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ---- Definición de campos ---- */
+var FIELDS = {
+  precio: ["Precio por acción", "€"],
+  bpa: ["BPA (beneficio por acción)", "€"],
+  acciones: ["Nº de acciones", "millones"],
+  beneficio: ["Beneficio neto", "millones"],
+  crecimiento: ["Crecimiento anual del BPA", "%"],
+  dividendo: ["Dividendo por acción", "€"],
+  perObjetivo: ["PER objetivo", "x"],
+  ventas: ["Ventas / ingresos", "millones"],
+  costeVentas: ["Coste de ventas", "millones"],
+  ebit: ["EBIT (beneficio operativo)", "millones"],
+  ebitda: ["EBITDA", "millones"],
+  intereses: ["Gastos financieros", "millones"],
+  impuesto: ["Tipo impositivo", "% (25 si vacío)"],
+  activo: ["Activo total", "millones"],
+  patrimonio: ["Patrimonio neto", "millones"],
+  activoCorriente: ["Activo corriente", "millones"],
+  pasivoCorriente: ["Pasivo corriente", "millones"],
+  inventarios: ["Existencias", "millones"],
+  caja: ["Caja y equivalentes", "millones"],
+  deuda: ["Deuda financiera total", "millones"],
+  fcf: ["Flujo de caja libre", "millones"]
+};
+var EXAMPLE = { precio:"42,5", acciones:"800", beneficio:"2000", crecimiento:"8", dividendo:"1,6", perObjetivo:"18",
+  ventas:"15000", costeVentas:"9000", ebit:"3200", ebitda:"4100", intereses:"400", impuesto:"25",
+  activo:"30000", patrimonio:"12000", activoCorriente:"7000", pasivoCorriente:"5000", inventarios:"2000",
+  caja:"2500", deuda:"9000", fcf:"1900" };
+
+/* ---- Cálculo (funciones puras) ---- */
+//CALC_START
+function num(s) {
+  if (s === undefined || s === null) return NaN;
+  s = String(s).trim().replace(/\s/g, "");
+  if (s === "") return NaN;
+  if (s.indexOf(",") > -1) s = s.replace(/\./g, "").replace(",", ".");
+  var x = Number(s);
+  return isFinite(x) ? x : NaN;
+}
+function ok() { for (var i = 0; i < arguments.length; i++) if (!isFinite(arguments[i])) return false; return true; }
+function bpaUsed(v) { var b = v.bpa; if (!isFinite(b) && ok(v.beneficio, v.acciones) && v.acciones !== 0) b = v.beneficio / v.acciones; return b; }
+function capOf(v) { return ok(v.precio, v.acciones) ? v.precio * v.acciones : NaN; }
+function evOf(v) { var c = capOf(v); return ok(c, v.deuda, v.caja) ? c + v.deuda - v.caja : NaN; }
+function div(a, b) { return ok(a, b) && b !== 0 ? a / b : NaN; }
+function band(x, goodMax, midMax, labels) { // menor es mejor
+  if (!isFinite(x)) return null;
+  if (x <= goodMax) return ["good", labels[0]];
+  if (x <= midMax) return ["mid", labels[1]];
+  return ["warn", labels[2]];
+}
+function bandUp(x, goodMin, midMin, labels) { // mayor es mejor
+  if (!isFinite(x)) return null;
+  if (x >= goodMin) return ["good", labels[0]];
+  if (x >= midMin) return ["mid", labels[1]];
+  return ["warn", labels[2]];
+}
+var R = {
+  per: { n: "PER", fmt: "x", need: "precio y BPA (o beneficio y acciones)", f: "Precio / BPA: años de beneficio que pagas.",
+    fn: function (v) { var b = bpaUsed(v); return ok(v.precio, b) && b > 0 ? v.precio / b : NaN; },
+    ev: function (x, v) { var b = bpaUsed(v); if (ok(v.precio, b) && b <= 0) return ["warn", "Pérdidas"]; return band(x, 12, 20, ["Bajo", "Medio", "Alto"]); } },
+  bpa: { n: "BPA usado", fmt: "e", need: "BPA o beneficio y acciones", f: "Beneficio por acción.", fn: function (v) { return bpaUsed(v); } },
+  ey: { n: "Rentabilidad por beneficio", fmt: "%", need: "PER", f: "1 / PER: beneficio anual sobre el precio.",
+    fn: function (v) { var b = bpaUsed(v); return ok(v.precio, b) && b > 0 ? b / v.precio * 100 : NaN; } },
+  peg: { n: "PEG", fmt: "x", need: "PER y crecimiento", f: "PER / crecimiento del BPA. Menor de 1 suele indicar crecimiento barato.",
+    fn: function (v) { var b = bpaUsed(v); return ok(v.precio, b, v.crecimiento) && b > 0 && v.crecimiento > 0 ? (v.precio / b) / v.crecimiento : NaN; },
+    ev: function (x) { return band(x, 1, 2, ["Atractivo", "Razonable", "Exigente"]); } },
+  payout: { n: "Payout", fmt: "%", need: "dividendo y BPA", f: "Parte del beneficio que se reparte.",
+    fn: function (v) { var b = bpaUsed(v); return ok(v.dividendo, b) && b > 0 ? v.dividendo / b * 100 : NaN; },
+    ev: function (x) { return band(x, 60, 100, ["Sostenible", "Ajustado", "Excesivo"]); } },
+  dy: { n: "Rentabilidad por dividendo", fmt: "%", need: "dividendo y precio", f: "Dividendo anual / precio.", fn: function (v) { return div(v.dividendo, v.precio) * 100; } },
+  cap: { n: "Capitalización", fmt: "m", need: "precio y acciones", f: "Precio x acciones (millones).", fn: capOf },
+  target: { n: "Precio con PER objetivo", fmt: "e", need: "PER objetivo y BPA", f: "PER objetivo x BPA.",
+    fn: function (v) { var b = bpaUsed(v); return ok(v.perObjetivo, b) && b > 0 ? v.perObjetivo * b : NaN; } },
+  upside: { n: "Recorrido hasta el objetivo", fmt: "%", need: "precio, PER objetivo y BPA", f: "Precio objetivo frente al precio actual.",
+    fn: function (v) { var b = bpaUsed(v); return ok(v.perObjetivo, b, v.precio) && b > 0 && v.precio > 0 ? (v.perObjetivo * b / v.precio - 1) * 100 : NaN; },
+    ev: function (x) { return bandUp(x, 15, 0, ["Con margen", "Ajustado", "Sobrevalorado"]); } },
+
+  mb: { n: "Margen bruto", fmt: "%", need: "ventas y coste de ventas", f: "(Ventas - coste) / ventas.",
+    fn: function (v) { return ok(v.ventas, v.costeVentas) ? div(v.ventas - v.costeVentas, v.ventas) * 100 : NaN; } },
+  mo: { n: "Margen operativo", fmt: "%", need: "EBIT y ventas", f: "EBIT / ventas.", fn: function (v) { return div(v.ebit, v.ventas) * 100; },
+    ev: function (x) { return bandUp(x, 15, 8, ["Alto", "Medio", "Bajo"]); } },
+  mn: { n: "Margen neto", fmt: "%", need: "beneficio y ventas", f: "Beneficio neto / ventas.", fn: function (v) { return div(v.beneficio, v.ventas) * 100; },
+    ev: function (x) { return bandUp(x, 10, 5, ["Alto", "Medio", "Bajo"]); } },
+  roe: { n: "ROE", fmt: "%", need: "beneficio y patrimonio", f: "Beneficio neto / patrimonio neto.", fn: function (v) { return div(v.beneficio, v.patrimonio) * 100; },
+    ev: function (x) { return bandUp(x, 15, 8, ["Alto", "Medio", "Bajo"]); } },
+  roa: { n: "ROA", fmt: "%", need: "beneficio y activo", f: "Beneficio neto / activo total.", fn: function (v) { return div(v.beneficio, v.activo) * 100; },
+    ev: function (x) { return bandUp(x, 5, 2, ["Alto", "Medio", "Bajo"]); } },
+  roic: { n: "ROIC", fmt: "%", need: "EBIT, deuda, patrimonio y caja", f: "EBIT x (1 - impuestos) / (deuda + patrimonio - caja).",
+    fn: function (v) { var t = isFinite(v.impuesto) ? v.impuesto : 25; return ok(v.ebit, v.deuda, v.patrimonio, v.caja) ? div(v.ebit * (1 - t / 100), v.deuda + v.patrimonio - v.caja) * 100 : NaN; },
+    ev: function (x) { return bandUp(x, 10, 6, ["Alto", "Medio", "Bajo"]); } },
+
+  rc: { n: "Liquidez corriente", fmt: "x", need: "activo y pasivo corriente", f: "Activo corriente / pasivo corriente.", fn: function (v) { return div(v.activoCorriente, v.pasivoCorriente); },
+    ev: function (x) { return bandUp(x, 1.5, 1, ["Holgada", "Justa", "Débil"]); } },
+  pa: { n: "Prueba ácida", fmt: "x", need: "activo corriente, existencias y pasivo corriente", f: "(Activo corriente - existencias) / pasivo corriente.",
+    fn: function (v) { return ok(v.activoCorriente, v.inventarios) ? div(v.activoCorriente - v.inventarios, v.pasivoCorriente) : NaN; },
+    ev: function (x) { return bandUp(x, 1, 0.7, ["Holgada", "Justa", "Débil"]); } },
+  rcaja: { n: "Ratio de caja", fmt: "x", need: "caja y pasivo corriente", f: "Caja / pasivo corriente.", fn: function (v) { return div(v.caja, v.pasivoCorriente); },
+    ev: function (x) { return bandUp(x, 0.3, 0.15, ["Holgada", "Justa", "Débil"]); } },
+  dpn: { n: "Deuda / patrimonio", fmt: "x", need: "deuda y patrimonio", f: "Deuda financiera / patrimonio neto.", fn: function (v) { return div(v.deuda, v.patrimonio); },
+    ev: function (x) { return band(x, 1, 2, ["Bajo", "Medio", "Alto"]); } },
+  dneb: { n: "Deuda neta / EBITDA", fmt: "x", need: "deuda, caja y EBITDA", f: "(Deuda - caja) / EBITDA: años para pagar la deuda.",
+    fn: function (v) { return ok(v.deuda, v.caja) ? div(v.deuda - v.caja, v.ebitda) : NaN; },
+    ev: function (x) { if (x <= 0) return ["good", "Caja neta"]; return band(x, 2, 3.5, ["Bajo", "Medio", "Alto"]); } },
+  cob: { n: "Cobertura de intereses", fmt: "x", need: "EBIT y gastos financieros", f: "EBIT / gastos financieros.", fn: function (v) { return div(v.ebit, v.intereses); },
+    ev: function (x) { return bandUp(x, 5, 2, ["Holgada", "Justa", "Débil"]); } },
+  da: { n: "Deuda / activo", fmt: "%", need: "deuda y activo", f: "Deuda financiera / activo total.", fn: function (v) { return div(v.deuda, v.activo) * 100; },
+    ev: function (x) { return band(x, 40, 60, ["Bajo", "Medio", "Alto"]); } },
+
+  ev: { n: "Valor de empresa (EV)", fmt: "m", need: "precio, acciones, deuda y caja", f: "Capitalización + deuda - caja (millones).", fn: evOf },
+  eveb: { n: "EV / EBITDA", fmt: "x", need: "EV y EBITDA", f: "Valor de empresa / EBITDA.", fn: function (v) { return div(evOf(v), v.ebitda); },
+    ev: function (x) { return band(x, 8, 14, ["Bajo", "Medio", "Alto"]); } },
+  evebit: { n: "EV / EBIT", fmt: "x", need: "EV y EBIT", f: "Valor de empresa / EBIT.", fn: function (v) { return div(evOf(v), v.ebit); },
+    ev: function (x) { return band(x, 10, 18, ["Bajo", "Medio", "Alto"]); } },
+  ps: { n: "Precio / ventas", fmt: "x", need: "precio, acciones y ventas", f: "Capitalización / ventas.", fn: function (v) { return div(capOf(v), v.ventas); },
+    ev: function (x) { return band(x, 2, 5, ["Bajo", "Medio", "Alto"]); } },
+  pb: { n: "Precio / valor contable", fmt: "x", need: "precio, acciones y patrimonio", f: "Capitalización / patrimonio neto.", fn: function (v) { return div(capOf(v), v.patrimonio); },
+    ev: function (x) { return band(x, 1.5, 3, ["Bajo", "Medio", "Alto"]); } },
+  fcfy: { n: "Rentabilidad por FCF", fmt: "%", need: "FCF, precio y acciones", f: "Flujo de caja libre / capitalización.", fn: function (v) { return div(v.fcf, capOf(v)) * 100; },
+    ev: function (x) { return bandUp(x, 6, 3, ["Alta", "Media", "Baja"]); } }
+};
+//CALC_END
+
+var TABS = [
+  { id: "per", label: "PER", title: "Precio y beneficio", hero: "per",
+    fields: ["precio", "bpa", "beneficio", "acciones", "crecimiento", "dividendo", "perObjetivo"],
+    results: ["per", "bpa", "ey", "peg", "payout", "dy", "cap", "target", "upside"],
+    note: "Si no tienes el BPA, déjalo vacío y rellena beneficio neto y nº de acciones." },
+  { id: "rent", label: "Rentabilidad", title: "Márgenes y retornos", hero: "roe",
+    fields: ["ventas", "costeVentas", "ebit", "beneficio", "activo", "patrimonio", "deuda", "caja", "impuesto"],
+    results: ["roe", "roa", "roic", "mb", "mo", "mn"],
+    note: "Usa las mismas unidades en todos los importes (por ejemplo, millones)." },
+  { id: "liq", label: "Liquidez", title: "Liquidez y deuda", hero: "rc",
+    fields: ["activoCorriente", "pasivoCorriente", "inventarios", "caja", "deuda", "patrimonio", "activo", "ebitda", "ebit", "intereses"],
+    results: ["rc", "pa", "rcaja", "dpn", "dneb", "cob", "da"],
+    note: "Los tramos de color son orientativos y cambian según el sector." },
+  { id: "val", label: "Valoración", title: "Múltiplos de valoración", hero: "eveb",
+    fields: ["precio", "acciones", "deuda", "caja", "ebitda", "ebit", "ventas", "patrimonio", "fcf", "dividendo"],
+    results: ["eveb", "evebit", "ev", "cap", "ps", "pb", "fcfy", "dy"],
+    note: "Acciones en millones y resto de importes en millones, igual que en las otras pestañas." }
+];
+
+/* ---- Estado y render ---- */
+var KEY = "ratios-calc-v1";
+var state = { vals: JSON.parse(JSON.stringify(EXAMPLE)), example: true, tab: "per" };
+try { var saved = JSON.parse(localStorage.getItem(KEY)); if (saved && saved.vals) state = saved; } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+var nf = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+var nf0 = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0 });
+function fmt(x, t) {
+  if (t === "x") return nf.format(x) + "x";
+  if (t === "%") return nf.format(x) + " %";
+  if (t === "e") return nf.format(x) + " €";
+  return nf0.format(x) + " M";
+}
+function vals() { var v = {}; for (var k in FIELDS) v[k] = num(state.vals[k]); return v; }
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+function renderTabs() {
+  var h = "";
+  TABS.forEach(function (t) { h += '<button class="tab" role="tab" data-id="' + t.id + '" aria-selected="' + (t.id === state.tab) + '">' + t.label + "</button>"; });
+  document.getElementById("tabs").innerHTML = h;
+}
+function renderPage() {
+  var t = TABS.filter(function (x) { return x.id === state.tab; })[0];
+  var h = "";
+  if (state.example) h += '<div class="banner"><span>Datos de ejemplo. Sube tu cuenta de resultados o escribe los tuyos.</span><div class="btns"><button class="btn solid" data-open-import="1">Subir cuenta</button><button class="btn" id="clear">Empezar en blanco</button></div></div>';
+  h += '<section class="card" id="heroBox"></section>';
+  h += '<section class="card"><h2>' + t.title + '</h2><div class="grid">';
+  t.fields.forEach(function (k) {
+    h += '<div class="field"><label for="f-' + k + '">' + FIELDS[k][0] + ' <span>(' + FIELDS[k][1] + ')</span></label>' +
+      '<input id="f-' + k + '" data-k="' + k + '" inputmode="decimal" autocomplete="off" value="' + esc(state.vals[k] || "") + '" placeholder="0"></div>';
+  });
+  h += '</div></section><section class="card"><h2>Resultados</h2><div class="res" id="res"></div></section>';
+  h += '<p class="note">' + t.note + " Herramienta de cálculo, no es una recomendación de inversión.</p>";
+  document.getElementById("main").innerHTML = h;
+  renderResults();
+}
+function pill(e) { return e ? '<span class="pill ' + e[0] + '">' + e[1] + "</span>" : ""; }
+function renderResults() {
+  var t = TABS.filter(function (x) { return x.id === state.tab; })[0];
+  var v = vals(), h = "";
+  t.results.forEach(function (id) {
+    var r = R[id], x = r.fn(v), has = isFinite(x), e = has && r.ev ? r.ev(x, v) : null;
+    if (id === t.hero) {
+      document.getElementById("heroBox").innerHTML = '<div class="hero"><span class="lab">' + r.n + '</span><div class="big">' + (has ? fmt(x, r.fmt) : "—") +
+        '</div><div class="row">' + (has ? pill(e) : '<span class="note">Falta: ' + r.need + "</span>") + '</div><span class="note">' + r.f + "</span></div>";
+      return;
+    }
+    h += '<div class="item"><span class="n">' + r.n + '</span><span class="v' + (has ? "" : " none") + '">' + (has ? fmt(x, r.fmt) : "—") + "</span>" +
+      '<span class="f">' + (has ? pill(e) + " " + r.f : "Falta: " + r.need) + "</span></div>";
+  });
+  document.getElementById("res").innerHTML = h;
+}
+
+document.addEventListener("input", function (ev) {
+  var k = ev.target.getAttribute && ev.target.getAttribute("data-k");
+  if (!k) return;
+  state.vals[k] = ev.target.value; save(); renderResults();
+});
+document.addEventListener("click", function (ev) {
+  var tb = ev.target.closest && ev.target.closest(".tab");
+  if (tb) { state.tab = tb.getAttribute("data-id"); save(); renderTabs(); renderPage(); window.scrollTo(0, 0); return; }
+  if (ev.target.id === "clear") { state.vals = {}; state.example = false; save(); renderPage(); }
+  if (ev.target.closest && ev.target.closest("[data-open-import]")) openSheet();
+});
+renderTabs(); renderPage();
+
+/* ================= Importación de la cuenta de resultados ================= */
+//PARSE_START
+function norm(s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ").trim(); }
+function parseAmount(tok) {
+  var t = String(tok).trim(), neg = false;
+  if (/^\(.*\)$/.test(t)) { neg = true; t = t.slice(1, -1); }
+  t = t.replace(/[€$%\s]/g, "");
+  if (/^[-−–]/.test(t)) { neg = !neg; t = t.slice(1); }
+  if (!/^\d[\d.,]*$/.test(t)) return NaN;
+  var hasD = t.indexOf(".") > -1, hasC = t.indexOf(",") > -1;
+  if (hasD && hasC) {
+    t = t.lastIndexOf(",") > t.lastIndexOf(".") ? t.replace(/\./g, "").replace(",", ".") : t.replace(/,/g, "");
+  } else if (hasD || hasC) {
+    var parts = t.split(hasD ? "." : ",");
+    var thousands = parts.length > 1 && parts[0].length >= 1 && parts[0].length <= 3 && parts.slice(1).every(function (p) { return p.length === 3; });
+    if (thousands) t = parts.join(""); else if (parts.length === 2) t = parts[0] + "." + parts[1]; else return NaN;
+  }
+  var x = Number(t);
+  return isFinite(x) ? (neg ? -x : x) : NaN;
+}
+function rowFromText(line) {
+  var toks = String(line).trim().split(/\s+/), nums = [];
+  while (toks.length) {
+    var t = toks[toks.length - 1];
+    if (t === "-" || t === "—" || t === "–") { nums.unshift({ v: 0, raw: "0" }); toks.pop(); continue; }
+    var v = parseAmount(t);
+    if (isFinite(v)) { nums.unshift({ v: v, raw: t }); toks.pop(); } else break;
+  }
+  return { label: toks.join(" "), nums: nums };
+}
+function rowFromCells(cells) {
+  var lab = [], nums = [];
+  cells.forEach(function (c) {
+    if (c === null || c === undefined || c === "") return;
+    if (typeof c === "number") { if (isFinite(c)) nums.push({ v: c, raw: "" }); return; }
+    var s = String(c).trim(); if (!s) return;
+    var v = parseAmount(s);
+    if (isFinite(v)) nums.push({ v: v, raw: s }); else if (s === "-" || s === "—") nums.push({ v: 0, raw: "0" }); else lab.push(s);
+  });
+  return { label: lab.join(" "), nums: nums };
+}
+function splitCSV(line, d) {
+  var out = [], cur = "", q = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line[i];
+    if (ch === '"') { if (q && line[i + 1] === '"') { cur += '"'; i++; } else q = !q; }
+    else if (ch === d && !q) { out.push(cur); cur = ""; }
+    else cur += ch;
+  }
+  out.push(cur); return out;
+}
+function csvToResult(t) {
+  var lines = t.split(/\r?\n/), head = lines.slice(0, 8).join("\n");
+  var d = head.indexOf(";") > -1 ? ";" : head.indexOf("\t") > -1 ? "\t" : ",";
+  return { rows: lines.map(function (l) { return rowFromCells(splitCSV(l, d)); }), text: t };
+}
+function textToResult(t) {
+  return { rows: t.split(/\r?\n/).map(function (l) { return l.indexOf("\t") > -1 ? rowFromCells(l.split("\t")) : rowFromText(l); }), text: t };
+}
+function pickValue(nums) {
+  var n = nums.slice();
+  while (n.length >= 2 && /^(19|20)\d\d$/.test(n[0].raw)) n.shift();
+  if (n.length >= 3 && /^\d{1,2}$/.test(n[0].raw)) n.shift(); // columna de nota
+  return n.length ? n[0].v : NaN;
+}
+var RULES = [
+  { k: "ventas", any: ["importe neto de la cifra de negocios", "cifra de negocios", "ingresos ordinarios", "total ingresos", "ingresos totales", "ventas netas", "net sales", "total revenue", "revenue", "ventas", "ingresos de explotacion"], not: ["coste", "costo", "cost of", "otros ingresos", "financier", "variacion"] },
+  { k: "costeVentas", abs: true, any: ["coste de ventas", "coste de las ventas", "costo de ventas", "cost of sales", "cost of revenue", "cost of goods sold", "aprovisionamientos", "consumo de materias"], not: [] },
+  { k: "ebitda", any: ["ebitda", "resultado bruto de explotacion", "oibda"], not: ["margen", "/"] },
+  { k: "ebit", any: ["resultado de explotacion", "resultado operativo", "beneficio de explotacion", "beneficio operativo", "operating income", "operating profit", "ebit"], not: ["bruto", "ebitda", "antes de amortizacion", "margen"] },
+  { k: "amort", abs: true, any: ["amortizacion del inmovilizado", "dotacion a la amortizacion", "dotaciones para amortizaciones", "amortizaciones", "depreciation and amortization", "depreciation"], not: ["antes", "acumulada"] },
+  { k: "intereses", abs: true, any: ["gastos financieros", "costes financieros", "interest expense", "finance costs"], not: ["ingresos", "netos", "neto"] },
+  { k: "ebt", any: ["resultado antes de impuestos", "beneficio antes de impuestos", "profit before tax", "income before taxes", "earnings before taxes"], not: [] },
+  { k: "tax", abs: true, any: ["impuestos sobre beneficios", "impuesto sobre beneficios", "impuesto sobre sociedades", "impuesto sobre las ganancias", "impuestos sobre las ganancias", "gasto por impuesto", "income tax"], not: ["antes", "before", "diferido", "activos", "pasivos"] },
+  { k: "beneficio", any: ["resultado atribuido a la sociedad dominante", "atribuido a la sociedad dominante", "beneficio atribuido", "resultado consolidado del ejercicio", "resultado del ejercicio", "beneficio neto", "resultado neto", "beneficio del ejercicio", "net income", "net profit", "profit for the year"], not: ["antes", "por accion", "per share", "minoritari", "no dominante", "interrumpidas", "margen"] },
+  { k: "bpa", any: ["beneficio basico por accion", "beneficio por accion basico", "basico por accion", "beneficio por accion", "resultado por accion", "ganancia por accion", "basic earnings per share", "earnings per share", "bpa", "eps"], not: ["diluid", "diluted"] },
+  { k: "dividendo", any: ["dividendo por accion", "dividend per share", "dps"], not: [] },
+  { k: "acciones", any: ["numero medio ponderado de acciones", "numero de acciones", "n de acciones", "acciones en circulacion", "weighted average shares", "shares outstanding"], not: ["propias", "valor"] },
+  { k: "activo", any: ["total activo", "activo total", "total assets"], not: ["corriente", "current"] },
+  { k: "patrimonio", any: ["total patrimonio neto", "patrimonio neto total", "total equity", "patrimonio neto"], not: ["pasivo", "liabilities", "variacion", "estado", "cambios"] },
+  { k: "activoCorriente", any: ["total activo corriente", "activo corriente", "total current assets", "current assets"], not: ["no corriente", "non-current", "non current"] },
+  { k: "pasivoCorriente", any: ["total pasivo corriente", "pasivo corriente", "total current liabilities", "current liabilities"], not: ["no corriente", "non-current", "non current"] },
+  { k: "inventarios", any: ["existencias", "inventarios", "inventories"], not: ["variacion", "deterioro"] },
+  { k: "caja", any: ["efectivo y otros activos liquidos equivalentes", "efectivo y equivalentes", "caja y equivalentes", "cash and cash equivalents", "tesoreria"], not: ["flujo", "aumento", "disminucion", "variacion", "inicio", "neto de", "procedente"] },
+  { k: "deuda", any: ["deuda financiera total", "deuda financiera bruta", "total deuda financiera", "deuda financiera", "total borrowings", "financial debt"], not: ["neta", "net"] },
+  { k: "fcf", any: ["flujo de caja libre", "free cash flow"], not: [] }
+];
+function hasPhrase(label, p) {
+  if (p.length <= 4) return new RegExp("(^|[^a-z])" + p + "([^a-z]|$)").test(label);
+  return label.indexOf(p) > -1;
+}
+function extract(rows) {
+  var prep = rows.map(function (r) { return { lab: norm(r.label), orig: r.label, val: pickValue(r.nums) }; })
+    .filter(function (r) { return /[a-z]/.test(r.lab) && r.lab.length <= 110 && isFinite(r.val); });
+  var out = {};
+  RULES.forEach(function (rule) {
+    for (var i = 0; i < rule.any.length; i++) {
+      var p = rule.any[i];
+      var hit = prep.filter(function (r) { return hasPhrase(r.lab, p) && !rule.not.some(function (n) { return r.lab.indexOf(n) > -1; }); })[0];
+      if (hit) { out[rule.k] = { v: rule.abs ? Math.abs(hit.val) : hit.val, src: hit.orig.trim() }; break; }
+    }
+  });
+  if (!out.ebitda && out.ebit && out.amort) out.ebitda = { v: out.ebit.v + out.amort.v, src: "Calculado: resultado de explotación + amortizaciones" };
+  if (out.tax && out.ebt && out.ebt.v > 0) out.impuesto = { v: Math.round(out.tax.v / out.ebt.v * 1000) / 10, src: "Calculado: impuesto / resultado antes de impuestos" };
+  delete out.amort; delete out.tax; delete out.ebt;
+  return out;
+}
+function detectUnit(text) {
+  var n = norm(text);
+  if (/miles de (euros|eur|€|dolares|usd)|en miles|\(miles|thousands|miles de €|en k€|k€/.test(n)) return "miles";
+  if (/millones de|en millones|\(millones|millions|mill\. ?(de )?(euros|€)|m€|mn €|mn eur/.test(n)) return "millones";
+  return null;
+}
+var MONEY = ["ventas", "costeVentas", "ebit", "ebitda", "intereses", "beneficio", "activo", "patrimonio", "activoCorriente", "pasivoCorriente", "inventarios", "caja", "deuda", "fcf"];
+var UNIT_F = { unidades: 1e-6, miles: 1e-3, millones: 1 };
+function convert(k, v, unit) {
+  if (MONEY.indexOf(k) > -1) return v * UNIT_F[unit];
+  if (k === "acciones") return v >= 1e7 ? v / 1e6 : v * UNIT_F[unit];
+  return v;
+}
+function toInput(x) { return String(Math.round(x * 10000) / 10000).replace(".", ","); }
+//PARSE_END
+
+var XLSX_URL = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+var PDF_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+var PDF_WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+function loadScript(src) {
+  return new Promise(function (res, rej) {
+    var s = document.createElement("script"); s.src = src; s.onload = res;
+    s.onerror = function () { rej(new Error("No se pudo cargar el lector de archivos. Revisa la conexión.")); };
+    document.head.appendChild(s);
+  });
+}
+async function pdfLines(buf) {
+  if (!window.pdfjsLib) await loadScript(PDF_URL);
+  var lib = window.pdfjsLib; lib.GlobalWorkerOptions.workerSrc = PDF_WORKER;
+  var doc = await lib.getDocument({ data: new Uint8Array(buf) }).promise, out = [];
+  for (var p = 1; p <= Math.min(doc.numPages, 40); p++) {
+    var tc = await (await doc.getPage(p)).getTextContent(), rows = [];
+    tc.items.forEach(function (it) {
+      if (!it.str || !it.str.trim()) return;
+      var y = it.transform[5], x = it.transform[4];
+      var r = rows.filter(function (r) { return Math.abs(r.y - y) < 3; })[0];
+      if (!r) { r = { y: y, items: [] }; rows.push(r); }
+      r.items.push({ x: x, s: it.str });
+    });
+    rows.sort(function (a, b) { return b.y - a.y; }).forEach(function (r) {
+      out.push(r.items.sort(function (a, b) { return a.x - b.x; }).map(function (i) { return i.s; }).join(" "));
+    });
+  }
+  if (!out.join("").trim()) throw new Error("Este PDF no tiene texto (parece escaneado). Prueba con el Excel o pega el texto.");
+  return out;
+}
+async function readFile(f) {
+  var name = f.name.toLowerCase();
+  if (/\.(xlsx|xls|ods)$/.test(name)) {
+    if (!window.XLSX) await loadScript(XLSX_URL);
+    var wb = XLSX.read(await f.arrayBuffer(), { type: "array" }), rows = [], text = "";
+    wb.SheetNames.forEach(function (sn) {
+      XLSX.utils.sheet_to_json(wb.Sheets[sn], { header: 1, raw: true, blankrows: false, defval: "" }).forEach(function (r) {
+        rows.push(rowFromCells(r)); text += r.join(" ") + "\n";
+      });
+    });
+    return { rows: rows, text: text };
+  }
+  if (/\.pdf$/.test(name) || f.type === "application/pdf") return textToResult((await pdfLines(await f.arrayBuffer())).join("\n"));
+  var t = await f.text();
+  return /\.csv$/.test(name) ? csvToResult(t) : textToResult(t);
+}
+
+var imp = null;
+var sheet = document.getElementById("sheet"), impOut = document.getElementById("impOut");
+function openSheet() { sheet.classList.add("open"); }
+function closeSheet() { sheet.classList.remove("open"); }
+document.getElementById("openImport").onclick = openSheet;
+document.getElementById("closeImport").onclick = closeSheet;
+sheet.addEventListener("click", function (e) { if (e.target === sheet) closeSheet(); });
+function setStatus(msg, err) { impOut.innerHTML = '<div class="status' + (err ? " err" : "") + '">' + esc(msg) + "</div>"; }
+
+function analyze(results, names) {
+  var rows = [], text = "";
+  results.forEach(function (r) { rows = rows.concat(r.rows); text += r.text + "\n"; });
+  var found = extract(rows);
+  if (!Object.keys(found).length) { setStatus("No he reconocido ninguna partida. Comprueba que aparecen nombres como Importe neto de la cifra de negocios, Resultado de explotación o Resultado del ejercicio, con sus importes al lado.", true); return; }
+  var det = detectUnit(text);
+  imp = { found: found, unit: det || "millones", detected: !!det, names: names };
+  renderPreview();
+}
+function renderPreview() {
+  var keys = Object.keys(FIELDS).filter(function (k) { return imp.found[k]; });
+  var miss = ["ventas", "ebit", "beneficio", "bpa", "acciones"].filter(function (k) { return !imp.found[k]; });
+  var h = '<div class="status">' + esc(imp.names) + ": " + keys.length + " datos encontrados. Revísalos antes de aplicar.</div>";
+  h += '<div class="field"><label for="unitSel">Los importes del documento están en' + (imp.detected ? " (detectado)" : "") + '</label><select id="unitSel">' +
+    ["unidades", "miles", "millones"].map(function (u) { return '<option value="' + u + '"' + (u === imp.unit ? " selected" : "") + ">" + (u === "unidades" ? "euros (unidades)" : u + " de euros") + "</option>"; }).join("") +
+    "</select></div><div id=\"impList\">";
+  keys.forEach(function (k) {
+    var f = imp.found[k], v = convert(k, f.v, imp.unit);
+    h += '<div class="imp-row"><input type="checkbox" checked data-k="' + k + '" id="ic-' + k + '" aria-label="Importar ' + esc(FIELDS[k][0]) + '">' +
+      '<label class="nm" for="ic-' + k + '">' + FIELDS[k][0] + '</label><input type="text" inputmode="decimal" id="iv-' + k + '" value="' + toInput(v) + '" aria-label="Valor de ' + esc(FIELDS[k][0]) + '">' +
+      '<span class="src">' + esc(f.src) + "</span></div>";
+  });
+  h += "</div>";
+  if (miss.length) h += '<p class="miss">No encontrado: ' + miss.map(function (k) { return FIELDS[k][0]; }).join(", ") + ". Puedes escribirlo después.</p>";
+  h += '<p class="miss">Para ROE, deuda o liquidez hace falta también el balance. El precio por acción lo pones tú.</p>';
+  h += '<button class="btn solid" id="applyImp" type="button" style="justify-content:center;padding:11px">Aplicar datos</button>';
+  impOut.innerHTML = h;
+  document.getElementById("unitSel").onchange = function () { imp.unit = this.value; renderPreview(); };
+  document.getElementById("applyImp").onclick = applyImport;
+}
+function applyImport() {
+  var cbs = Array.prototype.slice.call(document.querySelectorAll("#impList input[type=checkbox]:checked"));
+  if (state.example) { state.vals = {}; state.example = false; }
+  var n = 0;
+  cbs.forEach(function (cb) { var k = cb.getAttribute("data-k"), v = document.getElementById("iv-" + k).value.trim(); if (v) { state.vals[k] = v; n++; } });
+  state.tab = "per"; save(); closeSheet(); renderTabs(); renderPage(); window.scrollTo(0, 0);
+  impOut.innerHTML = ""; document.getElementById("fileIn").value = "";
+  toast(n + " datos importados." + (state.vals.precio ? "" : " Escribe el precio por acción para calcular el PER."));
+  if (!state.vals.precio) { var p = document.getElementById("f-precio"); if (p) p.focus(); }
+}
+document.getElementById("fileIn").addEventListener("change", async function () {
+  var files = Array.prototype.slice.call(this.files || []);
+  if (!files.length) return;
+  setStatus("Leyendo " + files.map(function (f) { return f.name; }).join(", ") + "…");
+  try {
+    var res = [];
+    for (var i = 0; i < files.length; i++) res.push(await readFile(files[i]));
+    analyze(res, files.map(function (f) { return f.name; }).join(", "));
+  } catch (e) { setStatus((e && e.message) || "No se pudo leer el archivo. Prueba con otro formato o pega el texto.", true); }
+});
+document.getElementById("analyzeText").onclick = function () {
+  var t = document.getElementById("pasteIn").value;
+  if (!t.trim()) { setStatus("Pega primero el texto de la cuenta de resultados.", true); return; }
+  analyze([textToResult(t)], "Texto pegado");
+};
+var toastT;
+function toast(msg) { var t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove("show"); }, 4500); }
+
+/* ================= Widget flotante ================= */
+//EVAL_START
+function evalExpr(src) {
+  var s = String(src).replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-").replace(/,/g, ".").replace(/\s/g, ""), i = 0;
+  function tok() { var m = /^(\d+\.?\d*|\.\d+)/.exec(s.slice(i)); if (!m) throw 0; i += m[0].length; return parseFloat(m[0]); }
+  function factor() {
+    var c = s[i], v;
+    if (c === "-") { i++; return -factor(); }
+    if (c === "+") { i++; return factor(); }
+    if (c === "(") { i++; v = expr(); if (s[i] === ")") i++; } else v = tok();
+    while (s[i] === "%") { i++; v /= 100; }
+    return v;
+  }
+  function term() { var v = factor(); while (s[i] === "*" || s[i] === "/") { var o = s[i++], r = factor(); v = o === "*" ? v * r : v / r; } return v; }
+  function expr() { var v = term(); while (s[i] === "+" || s[i] === "-") { var o = s[i++], r = term(); v = o === "+" ? v + r : v - r; } return v; }
+  var v = expr(); if (i < s.length) throw 0; return v;
+}
+//EVAL_END
+var QK = "ratios-qc-v1", qs = { ex: "", hist: "", mode: "calc", pos: null, q: {} };
+try { var qsv = JSON.parse(localStorage.getItem(QK)); if (qsv) qs = Object.assign(qs, qsv); } catch (e) {}
+function qsave() { try { localStorage.setItem(QK, JSON.stringify(qs)); } catch (e) {} }
+var nfc = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 6 });
+function calcDisp() {
+  document.getElementById("cEx").textContent = qs.ex || "0";
+  document.getElementById("cHist").textContent = qs.hist;
+  var pre = "";
+  if (/[+\-−×÷%(]/.test(qs.ex)) { try { var v = evalExpr(qs.ex); if (isFinite(v)) pre = "= " + nfc.format(v); } catch (e) {} }
+  document.getElementById("cPre").textContent = pre;
+}
+var KEYS = ["C", "(", ")", "⌫", "7", "8", "9", "÷", "4", "5", "6", "×", "1", "2", "3", "−", "%", "0", ",", "+", "="];
+document.getElementById("keys").innerHTML = KEYS.map(function (k) {
+  var cls = k === "=" ? "eq" : /[÷×−+%()C⌫]/.test(k) ? "op" : "";
+  var lab = k === "⌫" ? "Borrar último" : k === "C" ? "Borrar todo" : k;
+  return '<button type="button" class="' + cls + '" data-key="' + k + '" aria-label="' + lab + '">' + k + "</button>";
+}).join("");
+document.getElementById("keys").addEventListener("click", function (e) {
+  var b = e.target.closest("button"); if (!b) return;
+  var k = b.getAttribute("data-key");
+  if (k === "C") { qs.ex = ""; qs.hist = ""; }
+  else if (k === "⌫") qs.ex = qs.ex.slice(0, -1);
+  else if (k === "=") {
+    try { var v = evalExpr(qs.ex); if (!isFinite(v)) throw 0; qs.hist = qs.ex + " ="; qs.ex = String(Math.round(v * 1e8) / 1e8).replace(".", ","); }
+    catch (er) { qs.hist = "Expresión incompleta"; }
+  } else qs.ex += k;
+  qsave(); calcDisp();
+});
+function qn(id) { return num(document.getElementById(id).value); }
+var QUICK = [
+  ["q1o", function () { var a = qn("q1a"), b = qn("q1b"); return ok(a, b) && b > 0 ? nf.format(a / b) + "x" : null; }],
+  ["q2o", function () { var a = qn("q2a"), b = qn("q2b"); return ok(a, b) ? nf.format(a * b) + " €" : null; }],
+  ["q3o", function () { var a = qn("q3a"), b = qn("q3b"); return ok(a, b) && a !== 0 ? (b >= a ? "+" : "") + nf.format((b / a - 1) * 100) + " %" : null; }],
+  ["q4o", function () { var a = qn("q4a"), b = qn("q4b"); return ok(a, b) && b > 0 ? nf.format(a / b * 100) + " %" : null; }]
+];
+function quickCalc() { QUICK.forEach(function (q) { var r = q[1](); document.getElementById(q[0]).textContent = r || "—"; }); }
+["q1a", "q1b", "q2a", "q2b", "q3a", "q3b", "q4a", "q4b"].forEach(function (id) {
+  var el = document.getElementById(id); el.value = qs.q[id] || "";
+  el.addEventListener("input", function () { qs.q[id] = el.value; qsave(); quickCalc(); });
+});
+function setMode(m) {
+  qs.mode = m; qsave();
+  document.getElementById("segCalc").setAttribute("aria-pressed", m === "calc");
+  document.getElementById("segQuick").setAttribute("aria-pressed", m === "quick");
+  document.getElementById("qcCalc").hidden = m !== "calc";
+  document.getElementById("qcQuick").hidden = m !== "quick";
+}
+document.getElementById("segCalc").onclick = function () { setMode("calc"); };
+document.getElementById("segQuick").onclick = function () { setMode("quick"); };
+var fab = document.getElementById("fab"), qc = document.getElementById("qc");
+function toggleQC(open) { qc.classList.toggle("open", open); fab.setAttribute("aria-expanded", open); }
+document.getElementById("qcClose").onclick = function () { toggleQC(false); };
+function placeFab() {
+  if (!qs.pos) return;
+  var x = Math.min(Math.max(8, qs.pos.x), window.innerWidth - 66), y = Math.min(Math.max(8, qs.pos.y), window.innerHeight - 66);
+  fab.style.left = x + "px"; fab.style.top = y + "px"; fab.style.right = "auto"; fab.style.bottom = "auto";
+}
+var drag = null;
+fab.addEventListener("pointerdown", function (e) { var r = fab.getBoundingClientRect(); drag = { sx: e.clientX, sy: e.clientY, ox: r.left, oy: r.top, moved: false }; fab.setPointerCapture(e.pointerId); });
+fab.addEventListener("pointermove", function (e) {
+  if (!drag) return;
+  var dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+  if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 8) return;
+  drag.moved = true; qs.pos = { x: drag.ox + dx, y: drag.oy + dy }; placeFab();
+});
+fab.addEventListener("pointerup", function () { if (drag && drag.moved) qsave(); else toggleQC(!qc.classList.contains("open")); drag = null; });
+fab.addEventListener("pointercancel", function () { drag = null; });
+fab.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleQC(!qc.classList.contains("open")); } });
+window.addEventListener("resize", placeFab);
+placeFab(); setMode(qs.mode); calcDisp(); quickCalc();
+</script>
+</body>
+</html>
