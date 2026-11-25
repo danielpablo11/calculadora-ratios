@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#1f3864">
-<title>Dividendos fuera de EE. UU. · Dashboard</title>
+<title>Dividendos internacionales · Dashboard</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💶</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
@@ -37,7 +37,7 @@ main{max-width:1100px;margin:0 auto;padding:12px}
 html,body{overflow-x:hidden}
 @media(min-width:860px){.g2{grid-template-columns:1fr 1fr}}
 .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media(min-width:700px){.kpis{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:700px){.kpis{grid-template-columns:repeat(5,1fr)}}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .kpi b{display:block;font-size:24px;color:var(--ink)}
 .kpi span{font-size:12px;color:var(--ink2)}
@@ -66,7 +66,7 @@ button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 @media (prefers-color-scheme:dark){button.primary{color:#111}}
 label.chk{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink2)}
 .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{border-collapse:collapse;width:100%;min-width:760px;font-size:13px}
+table{border-collapse:collapse;width:100%;min-width:1100px;font-size:13px}
 th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
 th{position:sticky;top:0;background:var(--card);font-size:11.5px;color:var(--ink2);cursor:pointer;user-select:none}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
@@ -86,20 +86,22 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 </head>
 <body>
 <header>
-  <h1>💶 Dividendos fuera de EE. UU.</h1>
-  <p>Dashboard de candidatas con rentabilidad 4-12%, sostenibilidad y crecimiento del dividendo · Datos aproximados a nov. 2026 · No es asesoramiento financiero</p>
+  <h1>💶 Dividendos internacionales</h1>
+  <p>36 candidatas de 15 países (con una parte de EE. UU.) · rentabilidad objetivo 4-12%, sostenibilidad y crecimiento del dividendo · Datos aproximados a nov. 2026 · No es asesoramiento financiero</p>
 </header>
 <nav>
-  <a href="#resumen">Resumen</a><a href="#g1">Países</a><a href="#g2">Sectores</a><a href="#g3">Bruta vs neta</a><a href="#g4">Nota</a><a href="#g5">Payout</a><a href="#g6">Perfil</a><a href="#g7">Fiscalidad</a><a href="#g8">Pesos</a><a href="#g9">Proyección</a><a href="#tabla">Tabla</a><a href="#guia">Guía</a>
+  <a href="#resumen">Resumen</a><a href="#g1">Países</a><a href="#g2">Sectores</a><a href="#g3">Bruta vs neta</a><a href="#g4">Nota</a><a href="#g5">Payout</a><a href="#g6">Perfil</a><a href="#g10">Beta</a><a href="#g7">Fiscalidad</a><a href="#g8">Pesos</a><a href="#g9">Proyección</a><a href="#tabla">Tabla</a><a href="#guia">Guía</a>
 </nav>
 <main class="grid">
 
 <section id="resumen" class="card">
   <span class="tag">Tu cartera de dividendo</span>
   <h2>Elige qué empresas entran</h2>
-  <p class="sub">Marca o desmarca en la tabla (abajo) o usa estos atajos. Los gráficos de países, sectores, fiscalidad y proyección se recalculan con tu selección (pesos iguales).</p>
+  <p class="sub">Por defecto entran las 20 que mejor cumplen los criterios: rentabilidad del 4-12%, después semáforo (verde primero) y después nota. Marca o desmarca en la tabla o usa estos atajos. Los gráficos de países, sectores, fiscalidad y proyección se recalculan con tu selección (pesos iguales).</p>
   <div class="controls">
-    <button class="primary" data-preset="nucleo">Núcleo sostenible</button>
+    <button class="primary" data-preset="top">Top 20 (por defecto)</button>
+    <button data-preset="nucleo">Núcleo sin EE. UU.</button>
+    <button data-preset="sinus">Top 20 sin EE. UU.</button>
     <button data-preset="todas">Todas</button>
     <button data-preset="verde">Solo semáforo verde</button>
     <button data-preset="ninguna">Ninguna</button>
@@ -112,7 +114,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 <section id="g1" class="card">
   <span class="tag">Gráfico 1 · Anillo (donut)</span>
   <h2>¿En qué países está tu dinero?</h2>
-  <p class="sub">Peso de cada país en la selección. Objetivo: que EE. UU. deje de dominar.</p>
+  <p class="sub">Peso de cada país de <b>sede</b> en la selección. La exposición por ventas está en la tabla y en los indicadores.</p>
   <div class="chart"><canvas id="c1"></canvas></div>
   <p class="now" id="n1"></p>
   <details><summary>Cómo leer un gráfico de anillo</summary><dl class="how">
@@ -153,7 +155,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 <section id="g4" class="card">
   <span class="tag">Gráfico 4 · Barras apiladas</span>
   <h2>Nota 0-100: de dónde sale cada punto</h2>
-  <p class="sub">Rentabilidad (máx. 25) + Sostenibilidad (máx. 45) + Crecimiento (máx. 30) − penalización si hay señales de trampa. Línea de 70 = verde; 50 = ámbar.</p>
+  <p class="sub">Ordenadas por ranking (primero las que rentan 4-12%, luego semáforo y nota); las 20 primeras son la selección por defecto. Rentabilidad (máx. 25) + Sostenibilidad (máx. 45) + Crecimiento (máx. 30) − penalización si hay señales de trampa. Línea de 70 = verde; 50 = ámbar.</p>
   <div class="chart tall" id="w4"><canvas id="c4"></canvas></div>
   <p class="now" id="n4"></p>
   <details><summary>Cómo leer barras apiladas</summary><dl class="how">
@@ -166,12 +168,12 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 <section id="g5" class="card">
   <span class="tag">Gráfico 5 · Dispersión (burbujas)</span>
   <h2>Rentabilidad frente a payout: dónde están las trampas</h2>
-  <p class="sub">Horizontal: payout (% del beneficio o de la caja que reparte). Vertical: rentabilidad bruta. Tamaño de la burbuja: nota. Color: veredicto.</p>
+  <p class="sub">Horizontal: payout (% del beneficio o de la caja que reparte). Vertical: rentabilidad bruta. Tamaño: nota. Color: veredicto. Triángulo = EE. UU. El recuadro verde es la <b>zona óptima</b>.</p>
   <div class="chart mid"><canvas id="c5"></canvas></div>
   <p class="now" id="n5"></p>
   <details><summary>Cómo leer una dispersión</summary><dl class="how">
     <dt>Qué es</dt><dd>Cada burbuja es una empresa colocada según dos medidas a la vez. No hay barras: lo que cuenta es la posición.</dd>
-    <dt>Cómo se lee</dt><dd>Abajo-izquierda: pagan poco pero con mucho margen. Arriba-izquierda: lo ideal (rentan mucho con payout moderado). Arriba-derecha: alta rentabilidad repartiendo casi todo, la zona de las trampas. La línea vertical marca el 80%: pasar de ahí deja poco colchón (salvo REIT o midstream, que se miden sobre caja).</dd>
+    <dt>Cómo se lee</dt><dd><b>Zona óptima</b> (recuadro verde): rentabilidad del 5-9% (donde la nota de rentabilidad es máxima) con payout del 40-75% (rango sano de casi todos los sectores). Abajo-izquierda: pagan poco pero con mucho margen. Arriba-izquierda: lo ideal (rentan mucho con payout moderado). Arriba-derecha: alta rentabilidad repartiendo casi todo, la zona de las trampas. La línea vertical marca el 80%: pasar de ahí deja poco colchón (salvo REIT o midstream, que se miden sobre caja).</dd>
     <dt>Error típico</dt><dd>Creer que la posición explica la causa. Un payout alto en Enbridge es normal (se mide sobre su flujo de caja distribuible); el mismo número en una industrial sería una alarma. El color del veredicto ya tiene eso en cuenta.</dd>
   </dl></details>
 </section>
@@ -186,6 +188,19 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
     <dt>Qué es</dt><dd>Cada radio es un criterio puntuado de 0 (centro) a 100 (borde). Al unir los puntos sale una figura.</dd>
     <dt>Cómo se lee</dt><dd>Cuanto más grande y redonda la figura, más completa la empresa. Donde la línea de color sale por fuera de la gris (media de todas), es mejor que la media; donde se mete dentro, peor.</dd>
     <dt>Error típico</dt><dd>Fiarse del área: si cambias el orden de los radios, la forma cambia aunque los datos sean los mismos. Úsalo para ver puntos fuertes y débiles, no para medir.</dd>
+  </dl></details>
+</section>
+
+<section id="g10" class="card">
+  <span class="tag">Gráfico 10 · Barras con línea de referencia</span>
+  <h2>Beta: cuánto se mueve cada acción frente al mercado</h2>
+  <p class="sub">Beta 1 = se mueve como su mercado. 0,5 = la mitad. 1,2 = un 20% más. Solo tu selección, de menos a más volátil.</p>
+  <div class="chart tall" id="w10"><canvas id="c10"></canvas></div>
+  <p class="now" id="n10"></p>
+  <details><summary>Cómo leer este gráfico (y qué es la beta)</summary><dl class="how">
+    <dt>Qué es la beta</dt><dd>Mide la sensibilidad de la acción a los movimientos de su bolsa en los últimos 5 años. Con beta 0,5, si el mercado cae un 10%, la acción tiende a caer un 5%; con beta 1,2, un 12%.</dd>
+    <dt>Cómo se lee</dt><dd>Barras cortas = acciones tranquilas (utilities, tabaco, telecos, consumo básico). La línea discontinua en 1 separa las que amortiguan las caídas de las que las amplifican. En una cartera de dividendos interesa una beta media por debajo de 0,8.</dd>
+    <dt>Error típico</dt><dd>Pensar que beta baja = sin riesgo. BCE o Telus tienen beta baja y aun así recortaron el dividendo: la beta mide volatilidad del precio, no la solidez del dividendo. Valores aproximados: verifícalos en Yahoo Finance (campo «Beta (5Y Monthly)»).</dd>
   </dl></details>
 </section>
 
@@ -211,7 +226,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
   <p class="now" id="n8"></p>
   <details><summary>Cómo leer barras flotantes</summary><dl class="how">
     <dt>Qué es</dt><dd>Barras que no empiezan en cero: arrancan en el valor mínimo y terminan en el máximo de un rango.</dd>
-    <dt>Cómo se lee</dt><dd>Si tu peso real cae dentro de la barra, vas bien. El rombo naranja es el peso actual de tu selección en esa región (sin contar EE. UU. ni el Ibex que ya tengas fuera de esta lista).</dd>
+    <dt>Cómo se lee</dt><dd>Si tu peso real cae dentro de la barra, vas bien. El rombo naranja es el peso de tu selección en esa región, por país de sede, suponiendo que la selección sea la mitad de tu cartera.</dd>
     <dt>Error típico</dt><dd>Leer el largo como «cantidad». Aquí el largo es la holgura del rango; lo importante es dónde empieza y dónde acaba.</dd>
   </dl></details>
 </section>
@@ -241,10 +256,11 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
   <div class="controls">
     <select id="fPais"><option value="">Todos los países</option></select>
     <select id="fVer"><option value="">Todos los veredictos</option><option>Sostenible</option><option>Vigilar</option><option>Trampa</option></select>
+    <select id="fUS"><option value="">Con y sin EE. UU.</option><option value="si">Solo EE. UU.</option><option value="no">Sin EE. UU.</option></select>
     <span class="hint">Toca una cabecera para ordenar · casilla = entra en tu cartera</span>
   </div>
   <div class="tablewrap"><table id="tab"><thead></thead><tbody></tbody></table></div>
-  <p class="legend-note">Rent. neta = bruta × (1 − 19% IRPF − retención no recuperable). Payout sobre la métrica de su sector (beneficio, FCF, DCF o beneficio + capital). «n.v.»: no verificado en el informe, valor estimado. Ratings aproximados.</p>
+  <p class="legend-note"># = posición en el ranking (rentabilidad 4-12%, semáforo y nota). País sede = dónde cotiza y tributa el dividendo; exposición = de dónde vienen sus ventas (aprox.). Beta aproximada a 5 años frente a su mercado local. EE. UU.: retención del 15% recuperable entera con el formulario W-8BEN (sin él, 30%). Rent. neta = bruta × (1 − 19% IRPF − retención no recuperable). Payout sobre la métrica de su sector (beneficio, FCF, DCF o beneficio + capital). «n.v.»: no verificado en el informe, valor estimado. Ratings aproximados.</p>
 </section>
 
 <section id="guia" class="card">
@@ -259,6 +275,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
       <tr><td><b>Barras apiladas</b></td><td>De qué partes se compone un total</td><td>Total = largo; tramos = partes</td><td>Comparar tramos intermedios</td></tr>
       <tr><td><b>Barras flotantes</b></td><td>Rangos (mínimo-máximo)</td><td>Dónde empieza y acaba la barra</td><td>Leer el largo como cantidad</td></tr>
       <tr><td><b>Dispersión</b></td><td>Relación entre dos medidas, casos raros</td><td>Posición (x, y); tamaño = 3ª medida</td><td>Confundir correlación con causa</td></tr>
+      <tr><td><b>Barras + línea de referencia</b></td><td>Comparar con un valor clave (beta 1)</td><td>A qué lado de la línea cae cada barra</td><td>Olvidar qué significa la referencia</td></tr>
       <tr><td><b>Radar</b></td><td>Perfil de un elemento en varios criterios</td><td>Más lejos del centro = mejor</td><td>Fiarse del área</td></tr>
       <tr><td><b>Líneas</b></td><td>Evolución en el tiempo</td><td>La pendiente es la velocidad</td><td>Tomar una simulación por previsión</td></tr>
     </tbody>
@@ -274,7 +291,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 </section>
 </main>
 <footer>
-  Fuente: informe de investigación propio (nov. 2026) con datos de las webs de relación con inversores de cada empresa, AEAT y justETF. Rentabilidades y payouts aproximados: verifícalos antes de operar. Herramienta personal, no es asesoramiento financiero. Para editar datos: bloque <code>EMPRESAS</code> en este archivo.
+  Fuente: informe de investigación propio (nov. 2026) y, para EE. UU., datos publicados en noviembre de 2026 (TIKR, 24/7 Wall St., Motley Fool) con datos de las webs de relación con inversores de cada empresa, AEAT y justETF. Rentabilidades y payouts aproximados: verifícalos antes de operar. Herramienta personal, no es asesoramiento financiero. Para editar datos: bloque <code>EMPRESAS</code> en este archivo.
 </footer>
 
 <script>
@@ -285,38 +302,52 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 // pol: 'prog' progresiva/objetivo, 'pct' % del beneficio, 'var' variable · sig: nº señales de trampa
 // ver: veredicto del informe · nv: true si la rentabilidad no está verificada
 const EMPRESAS = [
- {t:"ENB.TO",n:"Enbridge",p:"Canadá",s:"Energía",d:"CAD",f:"Trimestral",y:5.75,po:65,pm:"DCF",pS:"v",cov:"v",debt:"a",yrs:31,rat:"BBB",cagr:3,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"31 subidas seguidas; payout 60-70% del DCF; deuda 4,5-5,0x (normal en oleoductos)."},
- {t:"TTE.PA",n:"TotalEnergies",p:"Francia",s:"Energía",d:"EUR",f:"Trimestral",y:5.75,po:50,pm:"Beneficio aj.",pS:"v",cov:"v",debt:"v",yrs:40,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"Política >5% anual hasta 2030; gearing 9%. Sensible al Brent.",nv:false},
- {t:"ALV.DE",n:"Allianz",p:"Alemania",s:"Financiero",d:"EUR",f:"Anual",y:4.4,po:60,pm:"Beneficio + SII",pS:"v",cov:"v",debt:"v",yrs:15,rat:"A",cagr:10,eps:"alto",pol:"pct",sig:0,ver:"Sostenible",note:"60% del beneficio; Solvencia II 218%. Retención alemana: reclamar exceso."},
- {t:"CS.PA",n:"AXA",p:"Francia",s:"Financiero",d:"EUR",f:"Anual",y:5.3,po:60,pm:"Beneficio + SII",pS:"v",cov:"v",debt:"v",yrs:15,rat:"A",cagr:9,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"Progresivo con suelo; Solvencia II 213%."},
- {t:"ZURN.SW",n:"Zurich Insurance",p:"Suiza",s:"Financiero",d:"CHF",f:"Anual",y:4.85,po:77,pm:"Beneficio + SII",pS:"a",cov:"v",debt:"v",yrs:16,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"~75% del beneficio con suelo. Retención suiza 35%: reclamar 20 pp."},
- {t:"G.MI",n:"Generali",p:"Italia",s:"Financiero",d:"EUR",f:"Anual",y:5.0,po:60,pm:"Beneficio + SII",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:10,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"Dividendo +10% anual 2025-27 que no baja ('ratchet'); SII 211%.",nv:true},
- {t:"SAMPO.HE",n:"Sampo",p:"Finlandia",s:"Financiero",d:"EUR",f:"Anual",y:4.0,po:75,pm:"Beneficio + SII",pS:"a",cov:"a",debt:"v",yrs:10,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"Progresivo; SII 175%. Tramitar formulario finlandés 6161e.",nv:true},
- {t:"NDA-FI.HE",n:"Nordea",p:"Finlandia",s:"Financiero",d:"EUR",f:"Semestral",y:6.0,po:69,pm:"Beneficio + CET1",pS:"a",cov:"v",debt:"v",yrs:5,rat:"A",cagr:12,eps:"neg",pol:"pct",sig:0,ver:"Sostenible",note:"Payout 60-70%; CET1 15,7%. Crecimiento ligado a tipos de interés."},
- {t:"D05.SI",n:"DBS Group",p:"Singapur",s:"Financiero",d:"SGD",f:"Trimestral",y:4.75,po:58,pm:"Beneficio + CET1",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:15,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"0,81 S$/trimestre; parte de 'capital return' temporal hasta 2027. Sin retención en origen."},
- {t:"NG.L",n:"National Grid",p:"Reino Unido",s:"Utilities",d:"GBP",f:"Semestral",y:4.0,po:62,pm:"Beneficio",pS:"v",cov:"a",debt:"a",yrs:10,rat:"BBB",cagr:3,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"Crece con la inflación británica (CPIH). 0% de retención."},
- {t:"SREN.SW",n:"Swiss Re",p:"Suiza",s:"Financiero",d:"USD",f:"Anual",y:5.0,po:70,pm:"Beneficio + SST",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:7,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"≥7% anual 2025-27; SST 259%. Retención suiza 35%.",nv:true},
- {t:"2914.T",n:"Japan Tobacco",p:"Japón",s:"Consumo básico",d:"JPY",f:"Semestral",y:4.25,po:75,pm:"Beneficio",pS:"v",cov:"v",debt:"v",yrs:4,rat:"A",cagr:6,eps:"medio",pol:"pct",sig:0,ver:"Sostenible",note:"Payout 75% ±5; guía 2026 272 ¥. Recortó en 2021: baja si cae el beneficio."},
- {t:"TLS.AX",n:"Telstra",p:"Australia",s:"Comunicaciones",d:"AUD",f:"Semestral",y:4.3,po:85,pm:"Beneficio",pS:"a",cov:"v",debt:"v",yrs:4,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"+10,5% en FY26; 90,5% 'franked' (casi sin retención). DN/EBITDA 1,9x."},
- {t:"BATS.L",n:"British American Tobacco",p:"Reino Unido",s:"Consumo básico",d:"GBP",f:"Trimestral",y:6.0,po:70,pm:"Beneficio",pS:"v",cov:"r",debt:"a",yrs:25,rat:"BBB",cagr:2,eps:"medio",pol:"prog",sig:1,ver:"Vigilar",note:"FCF 2025 no cubrió el dividendo (pago Canadá). Sector en declive.",nv:true},
- {t:"LGEN.L",n:"Legal & General",p:"Reino Unido",s:"Financiero",d:"GBP",f:"Semestral",y:7.7,po:104,pm:"Beneficio core",pS:"r",cov:"a",debt:"v",yrs:15,rat:"A",cagr:3,eps:"medio",pol:"prog",sig:1,ver:"Vigilar",note:"Payout ≈104% del beneficio 'core'; +2% anual hasta 2027."},
- {t:"ENEL.MI",n:"Enel",p:"Italia",s:"Utilities",d:"EUR",f:"Semestral",y:5.5,po:70,pm:"Beneficio",pS:"v",cov:"a",debt:"a",yrs:10,rat:"BBB",cagr:4,eps:"medio",pol:"prog",sig:1,ver:"Vigilar",note:"Deuda neta +15,7% en 2026. Objetivo ~6% anual de dividendo.",nv:true},
- {t:"RIO.L",n:"Rio Tinto",p:"Reino Unido",s:"Materiales",d:"USD",f:"Semestral",y:5.5,po:55,pm:"Beneficio subyacente",pS:"v",cov:"v",debt:"v",yrs:2,rat:"A",cagr:0,eps:"medio",pol:"var",sig:0,ver:"Vigilar",note:"Dividendo variable 40-60%: puede caer 30-50% con hierro o cobre."},
- {t:"BHP.AX",n:"BHP",p:"Australia",s:"Materiales",d:"USD",f:"Semestral",y:4.3,po:60,pm:"Beneficio subyacente",pS:"v",cov:"v",debt:"a",yrs:2,rat:"A",cagr:-8,eps:"medio",pol:"var",sig:1,ver:"Vigilar",note:"Mínimo 50% del beneficio; deuda al alza. Franked 100%."},
- {t:"BNS.TO",n:"Bank of Nova Scotia",p:"Canadá",s:"Financiero",d:"CAD",f:"Trimestral",y:3.55,po:60,pm:"Beneficio + CET1",pS:"a",cov:"v",debt:"v",yrs:15,rat:"A",cagr:4,eps:"medio",pol:"prog",sig:0,ver:"Vigilar",note:"Bajo el 4%: solo si cae el precio. CET1 13,3%."},
- {t:"EQNR.OL",n:"Equinor",p:"Noruega",s:"Energía",d:"USD",f:"Trimestral",y:3.3,po:40,pm:"FCF",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:8,eps:"neg",pol:"prog",sig:0,ver:"Vigilar",note:"Efectivo 3,3% + recompras. >5% anual. Retención noruega 25%."},
- {t:"8058.T",n:"Mitsubishi Corp.",p:"Japón",s:"Industrial",d:"JPY",f:"Semestral",y:3.0,po:35,pm:"Beneficio",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:12,eps:"alto",pol:"prog",sig:0,ver:"Vigilar",note:"Rentabilidad baja pero dividendo progresivo y recompras fuertes.",nv:true},
- {t:"IBE.MC",n:"Iberdrola",p:"España",s:"Utilities",d:"EUR",f:"Semestral",y:3.4,po:70,pm:"Beneficio",pS:"v",cov:"a",debt:"a",yrs:15,rat:"BBB",cagr:8,eps:"alto",pol:"pct",sig:0,ver:"Vigilar",note:"Ya en el Ibex: no diversifica por país."},
- {t:"MBG.DE",n:"Mercedes-Benz",p:"Alemania",s:"Consumo discrecional",d:"EUR",f:"Anual",y:9.3,po:63,pm:"Beneficio",pS:"a",cov:"v",debt:"v",yrs:0,rat:"A",cagr:-10,eps:"neg",pol:"pct",sig:3,ver:"Trampa",note:"DPA 5,30 → 4,30 → 3,50 €. Beneficio a la baja por China."},
- {t:"BCE.TO",n:"BCE",p:"Canadá",s:"Comunicaciones",d:"CAD",f:"Trimestral",y:5.8,po:75,pm:"FCF",pS:"a",cov:"a",debt:"r",yrs:1,rat:"BBB",cagr:-12,eps:"medio",pol:"pct",sig:3,ver:"Trampa",note:"Recorte del 56% en 2025; deuda 3,7x; payout por encima de su objetivo."},
- {t:"T.TO",n:"Telus",p:"Canadá",s:"Comunicaciones",d:"CAD",f:"Trimestral",y:6.0,po:65,pm:"FCF",pS:"a",cov:"a",debt:"r",yrs:0,rat:"low",cagr:-10,eps:"medio",pol:"pct",sig:3,ver:"Trampa",note:"Recorte del 55% en 2026; DN/EBITDA 3,6x; payout sobre objetivo."},
+ {t:"ENB.TO",beta:0.85,us:55,exp:"Canadá y EE. UU.",n:"Enbridge",p:"Canadá",s:"Energía",d:"CAD",f:"Trimestral",y:5.75,po:65,pm:"DCF",pS:"v",cov:"v",debt:"a",yrs:31,rat:"BBB",cagr:3,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"31 subidas seguidas; payout 60-70% del DCF; deuda 4,5-5,0x (normal en oleoductos)."},
+ {t:"TTE.PA",beta:0.6,us:10,exp:"Global (Europa, África, Oriente Medio)",n:"TotalEnergies",p:"Francia",s:"Energía",d:"EUR",f:"Trimestral",y:5.75,po:50,pm:"Beneficio aj.",pS:"v",cov:"v",debt:"v",yrs:40,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"Política >5% anual hasta 2030; gearing 9%. Sensible al Brent.",nv:false},
+ {t:"ALV.DE",beta:1.0,us:15,exp:"Europa (Alemania, Francia, Italia) y EE. UU.",n:"Allianz",p:"Alemania",s:"Financiero",d:"EUR",f:"Anual",y:4.4,po:60,pm:"Beneficio + SII",pS:"v",cov:"v",debt:"v",yrs:15,rat:"A",cagr:10,eps:"alto",pol:"pct",sig:0,ver:"Sostenible",note:"60% del beneficio; Solvencia II 218%. Retención alemana: reclamar exceso."},
+ {t:"CS.PA",beta:1.1,us:10,exp:"Francia, resto de Europa y Asia",n:"AXA",p:"Francia",s:"Financiero",d:"EUR",f:"Anual",y:5.3,po:60,pm:"Beneficio + SII",pS:"v",cov:"v",debt:"v",yrs:15,rat:"A",cagr:9,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"Progresivo con suelo; Solvencia II 213%."},
+ {t:"ZURN.SW",beta:0.7,us:40,exp:"Global (EE. UU. y Europa)",n:"Zurich Insurance",p:"Suiza",s:"Financiero",d:"CHF",f:"Anual",y:4.85,po:77,pm:"Beneficio + SII",pS:"a",cov:"v",debt:"v",yrs:16,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"~75% del beneficio con suelo. Retención suiza 35%: reclamar 20 pp."},
+ {t:"G.MI",beta:0.95,us:2,exp:"Italia, Francia y Alemania",n:"Generali",p:"Italia",s:"Financiero",d:"EUR",f:"Anual",y:5.0,po:60,pm:"Beneficio + SII",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:10,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"Dividendo +10% anual 2025-27 que no baja ('ratchet'); SII 211%.",nv:true},
+ {t:"SAMPO.HE",beta:0.6,us:0,exp:"Nórdicos y Reino Unido",n:"Sampo",p:"Finlandia",s:"Financiero",d:"EUR",f:"Anual",y:4.0,po:75,pm:"Beneficio + SII",pS:"a",cov:"a",debt:"v",yrs:10,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"Progresivo; SII 175%. Tramitar formulario finlandés 6161e.",nv:true},
+ {t:"NDA-FI.HE",beta:0.9,us:0,exp:"Nórdicos",n:"Nordea",p:"Finlandia",s:"Financiero",d:"EUR",f:"Semestral",y:6.0,po:69,pm:"Beneficio + CET1",pS:"a",cov:"v",debt:"v",yrs:5,rat:"A",cagr:12,eps:"neg",pol:"pct",sig:0,ver:"Sostenible",note:"Payout 60-70%; CET1 15,7%. Crecimiento ligado a tipos de interés."},
+ {t:"D05.SI",beta:0.8,us:2,exp:"Singapur, Hong Kong y China",n:"DBS Group",p:"Singapur",s:"Financiero",d:"SGD",f:"Trimestral",y:4.75,po:58,pm:"Beneficio + CET1",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:15,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"0,81 S$/trimestre; parte de 'capital return' temporal hasta 2027. Sin retención en origen."},
+ {t:"NG.L",beta:0.45,us:45,exp:"Reino Unido y EE. UU. (Nueva York, Massachusetts)",n:"National Grid",p:"Reino Unido",s:"Utilities",d:"GBP",f:"Semestral",y:4.0,po:62,pm:"Beneficio",pS:"v",cov:"a",debt:"a",yrs:10,rat:"BBB",cagr:3,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"Crece con la inflación británica (CPIH). 0% de retención."},
+ {t:"SREN.SW",beta:0.75,us:45,exp:"Global (EE. UU. ~45%)",n:"Swiss Re",p:"Suiza",s:"Financiero",d:"USD",f:"Anual",y:5.0,po:70,pm:"Beneficio + SST",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:7,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"≥7% anual 2025-27; SST 259%. Retención suiza 35%.",nv:true},
+ {t:"2914.T",beta:0.4,us:3,exp:"Global (Europa, Asia y Japón)",n:"Japan Tobacco",p:"Japón",s:"Consumo básico",d:"JPY",f:"Semestral",y:4.25,po:75,pm:"Beneficio",pS:"v",cov:"v",debt:"v",yrs:4,rat:"A",cagr:6,eps:"medio",pol:"pct",sig:0,ver:"Sostenible",note:"Payout 75% ±5; guía 2026 272 ¥. Recortó en 2021: baja si cae el beneficio."},
+ {t:"TLS.AX",beta:0.3,us:0,exp:"Australia",n:"Telstra",p:"Australia",s:"Comunicaciones",d:"AUD",f:"Semestral",y:4.3,po:85,pm:"Beneficio",pS:"a",cov:"v",debt:"v",yrs:4,rat:"A",cagr:6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"+10,5% en FY26; 90,5% 'franked' (casi sin retención). DN/EBITDA 1,9x."},
+ {t:"BATS.L",beta:0.4,us:45,exp:"Global (EE. UU. ~45%)",n:"British American Tobacco",p:"Reino Unido",s:"Consumo básico",d:"GBP",f:"Trimestral",y:6.0,po:70,pm:"Beneficio",pS:"v",cov:"r",debt:"a",yrs:25,rat:"BBB",cagr:2,eps:"medio",pol:"prog",sig:1,ver:"Vigilar",note:"FCF 2025 no cubrió el dividendo (pago Canadá). Sector en declive.",nv:true},
+ {t:"LGEN.L",beta:1.1,us:20,exp:"Reino Unido y EE. UU.",n:"Legal & General",p:"Reino Unido",s:"Financiero",d:"GBP",f:"Semestral",y:7.7,po:104,pm:"Beneficio core",pS:"r",cov:"a",debt:"v",yrs:15,rat:"A",cagr:3,eps:"medio",pol:"prog",sig:1,ver:"Vigilar",note:"Payout ≈104% del beneficio 'core'; +2% anual hasta 2027."},
+ {t:"ENEL.MI",beta:0.9,us:5,exp:"Italia, España y Latinoamérica",n:"Enel",p:"Italia",s:"Utilities",d:"EUR",f:"Semestral",y:5.5,po:70,pm:"Beneficio",pS:"v",cov:"a",debt:"a",yrs:10,rat:"BBB",cagr:4,eps:"medio",pol:"prog",sig:1,ver:"Vigilar",note:"Deuda neta +15,7% en 2026. Objetivo ~6% anual de dividendo.",nv:true},
+ {t:"RIO.L",beta:0.65,us:10,exp:"China (clientes) y Australia (minas)",n:"Rio Tinto",p:"Reino Unido",s:"Materiales",d:"USD",f:"Semestral",y:5.5,po:55,pm:"Beneficio subyacente",pS:"v",cov:"v",debt:"v",yrs:2,rat:"A",cagr:0,eps:"medio",pol:"var",sig:0,ver:"Vigilar",note:"Dividendo variable 40-60%: puede caer 30-50% con hierro o cobre."},
+ {t:"BHP.AX",beta:0.85,us:5,exp:"China (clientes) y Australia",n:"BHP",p:"Australia",s:"Materiales",d:"USD",f:"Semestral",y:4.3,po:60,pm:"Beneficio subyacente",pS:"v",cov:"v",debt:"a",yrs:2,rat:"A",cagr:-8,eps:"medio",pol:"var",sig:1,ver:"Vigilar",note:"Mínimo 50% del beneficio; deuda al alza. Franked 100%."},
+ {t:"BNS.TO",beta:1.0,us:10,exp:"Canadá y Latinoamérica",n:"Bank of Nova Scotia",p:"Canadá",s:"Financiero",d:"CAD",f:"Trimestral",y:3.55,po:60,pm:"Beneficio + CET1",pS:"a",cov:"v",debt:"v",yrs:15,rat:"A",cagr:4,eps:"medio",pol:"prog",sig:0,ver:"Vigilar",note:"Bajo el 4%: solo si cae el precio. CET1 13,3%."},
+ {t:"EQNR.OL",beta:0.4,us:10,exp:"Noruega y Europa",n:"Equinor",p:"Noruega",s:"Energía",d:"USD",f:"Trimestral",y:3.3,po:40,pm:"FCF",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:8,eps:"neg",pol:"prog",sig:0,ver:"Vigilar",note:"Efectivo 3,3% + recompras. >5% anual. Retención noruega 25%."},
+ {t:"8058.T",beta:0.9,us:10,exp:"Japón, Asia y global",n:"Mitsubishi Corp.",p:"Japón",s:"Industrial",d:"JPY",f:"Semestral",y:3.0,po:35,pm:"Beneficio",pS:"v",cov:"v",debt:"v",yrs:5,rat:"A",cagr:12,eps:"alto",pol:"prog",sig:0,ver:"Vigilar",note:"Rentabilidad baja pero dividendo progresivo y recompras fuertes.",nv:true},
+ {t:"IBE.MC",beta:0.6,us:25,exp:"España, Reino Unido, EE. UU. y Brasil",n:"Iberdrola",p:"España",s:"Utilities",d:"EUR",f:"Semestral",y:3.4,po:70,pm:"Beneficio",pS:"v",cov:"a",debt:"a",yrs:15,rat:"BBB",cagr:8,eps:"alto",pol:"pct",sig:0,ver:"Vigilar",note:"Ya en el Ibex: no diversifica por país."},
+ {t:"MBG.DE",beta:1.2,us:20,exp:"China, Europa y EE. UU.",n:"Mercedes-Benz",p:"Alemania",s:"Consumo discrecional",d:"EUR",f:"Anual",y:9.3,po:63,pm:"Beneficio",pS:"a",cov:"v",debt:"v",yrs:0,rat:"A",cagr:-10,eps:"neg",pol:"pct",sig:3,ver:"Trampa",note:"DPA 5,30 → 4,30 → 3,50 €. Beneficio a la baja por China."},
+ {t:"BCE.TO",beta:0.5,us:3,exp:"Canadá",n:"BCE",p:"Canadá",s:"Comunicaciones",d:"CAD",f:"Trimestral",y:5.8,po:75,pm:"FCF",pS:"a",cov:"a",debt:"r",yrs:1,rat:"BBB",cagr:-12,eps:"medio",pol:"pct",sig:3,ver:"Trampa",note:"Recorte del 56% en 2025; deuda 3,7x; payout por encima de su objetivo."},
+ {t:"T.TO",beta:0.6,us:5,exp:"Canadá",n:"Telus",p:"Canadá",s:"Comunicaciones",d:"CAD",f:"Trimestral",y:6.0,po:65,pm:"FCF",pS:"a",cov:"a",debt:"r",yrs:0,rat:"low",cagr:-10,eps:"medio",pol:"pct",sig:3,ver:"Trampa",note:"Recorte del 55% en 2026; DN/EBITDA 3,6x; payout sobre objetivo."},
+ // ---- EE. UU. (datos aprox. nov. 2026; retención 15% recuperable con el formulario W-8BEN) ----
+ {t:"VZ",beta:.4,us:100,exp:"EE. UU.",n:"Verizon",p:"EE. UU.",s:"Comunicaciones",d:"USD",f:"Trimestral",y:6.2,po:52,pm:"FCF",pS:"v",cov:"v",debt:"a",yrs:19,rat:"BBB",cagr:1.9,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"Dividendo = 52% del flujo de caja libre; FCF +12% en el 3T26. Deuda 3,3x, alta para una teleco."},
+ {t:"O",beta:.85,us:85,exp:"EE. UU. ~85%, Reino Unido y Europa",n:"Realty Income",p:"EE. UU.",s:"Inmobiliario",d:"USD",f:"Mensual",y:5.4,po:75,pm:"AFFO",pS:"v",cov:"v",debt:"v",yrs:31,rat:"A",cagr:2.9,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"REIT de pago mensual; 75% del AFFO; rating A−. Crecimiento lento (~3%)."},
+ {t:"PEP",beta:.5,us:57,exp:"EE. UU. ~57%, Latinoamérica y Europa",n:"PepsiCo",p:"EE. UU.",s:"Consumo básico",d:"USD",f:"Trimestral",y:4.3,po:75,pm:"FCF",pS:"v",cov:"a",debt:"v",yrs:54,rat:"A",cagr:6.9,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"54 años subiendo; usa el 75% de su caja: cobertura más justa que P&G."},
+ {t:"MO",beta:.6,us:100,exp:"EE. UU.",n:"Altria",p:"EE. UU.",s:"Consumo básico",d:"USD",f:"Trimestral",y:6.0,po:78,pm:"Beneficio",pS:"a",cov:"a",debt:"v",yrs:57,rat:"BBB",cagr:4,eps:"medio",pol:"prog",sig:0,ver:"Vigilar",note:"Payout 78% del beneficio; tabaco en declive estructural, como BAT."},
+ {t:"PFE",beta:.55,us:60,exp:"EE. UU. ~60%",n:"Pfizer",p:"EE. UU.",s:"Salud",d:"USD",f:"Trimestral",y:6.3,po:89,pm:"FCF",pS:"a",cov:"a",debt:"v",yrs:16,rat:"A",cagr:2.5,eps:"neg",pol:"prog",sig:1,ver:"Vigilar",note:"Dividendo = 89% del FCF; la caducidad de patentes presiona el beneficio."},
+ {t:"PG",beta:.4,us:46,exp:"EE. UU. ~46%, Europa y resto del mundo",n:"Procter & Gamble",p:"EE. UU.",s:"Consumo básico",d:"USD",f:"Trimestral",y:2.6,po:67,pm:"FCF",pS:"v",cov:"v",debt:"v",yrs:70,rat:"A",cagr:5.6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"70 años subiendo; deuda 0,9x. Rentabilidad bajo el 4%: no suma puntos de rentabilidad."},
+ {t:"KO",beta:.45,us:35,exp:"Global (EE. UU. ~35%)",n:"Coca-Cola",p:"EE. UU.",s:"Consumo básico",d:"USD",f:"Trimestral",y:2.3,po:62,pm:"Beneficio",pS:"v",cov:"a",debt:"v",yrs:64,rat:"A",cagr:4.5,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"64 años subiendo; tras subir ~35% en 2026 rinde solo un 2,3%."},
+ {t:"MCD",beta:.55,us:40,exp:"EE. UU. ~40%, resto internacional",n:"McDonald's",p:"EE. UU.",s:"Consumo discrecional",d:"USD",f:"Trimestral",y:2.7,po:60,pm:"Beneficio",pS:"v",cov:"v",debt:"a",yrs:50,rat:"BBB",cagr:7,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"50 años subiendo (Dividend King); deuda elevada por su modelo de franquicias.",nv:true},
+ {t:"IBM",beta:.7,us:45,exp:"Américas ~50%, Europa ~30%, Asia",n:"IBM",p:"EE. UU.",s:"Tecnología",d:"USD",f:"Trimestral",y:2.3,po:60,pm:"Beneficio aj.",pS:"a",cov:"v",debt:"a",yrs:31,rat:"A",cagr:0.6,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"31 años subiendo, pero con subidas mínimas (~0,6% al año).",nv:true},
+ {t:"JNJ",beta:.4,us:55,exp:"EE. UU. ~55%",n:"Johnson & Johnson",p:"EE. UU.",s:"Salud",d:"USD",f:"Trimestral",y:1.9,po:47,pm:"Beneficio",pS:"v",cov:"v",debt:"v",yrs:64,rat:"A",cagr:5,eps:"medio",pol:"prog",sig:0,ver:"Sostenible",note:"Rating AAA y 64 años subiendo; rentabilidad baja (1,9%)."},
+ {t:"CVX",beta:.9,us:40,exp:"EE. UU. ~40%, global",n:"Chevron",p:"EE. UU.",s:"Energía",d:"USD",f:"Trimestral",y:2.8,po:51,pm:"FCF",pS:"a",cov:"v",debt:"v",yrs:39,rat:"A",cagr:6,eps:"alto",pol:"prog",sig:0,ver:"Sostenible",note:"39 años subiendo; deuda 0,56x. Depende del precio del petróleo."},
 ];
 // retención no recuperable (fracción) por país; 'tram' = valor si se tramitan formularios
 const RETENCION = {"Reino Unido":[0,0],"Francia":[0,0],"Países Bajos":[0,0],"Alemania":[.11375,.11375],"Italia":[.11,.11],"Suiza":[.20,.20],
- "Noruega":[.10,0],"Finlandia":[.15,0],"Suecia":[.15,.15],"Canadá":[.10,0],"Australia":[0.014,0.014],"Japón":[.10315,.10315],"Singapur":[0,0],"España":[0,0]};
-const OBJETIVO = [["EE. UU.",20,25,null],["España (Ibex)",15,15,["España"]],["Europa ex-España",30,35,["Reino Unido","Francia","Alemania","Italia","Suiza","Noruega","Finlandia","Suecia","Países Bajos"]],["Canadá",10,12,["Canadá"]],["Japón",8,10,["Japón"]],["Australia / Singapur",8,10,["Australia","Singapur"]]];
+ "Noruega":[.10,0],"Finlandia":[.15,0],"Suecia":[.15,.15],"Canadá":[.10,0],"Australia":[0.014,0.014],"Japón":[.10315,.10315],"Singapur":[0,0],"España":[0,0],"EE. UU.":[0,0]};
+const OBJETIVO = [["EE. UU.",20,25,["EE. UU."]],["España (Ibex)",15,15,["España"]],["Europa ex-España",30,35,["Reino Unido","Francia","Alemania","Italia","Suiza","Noruega","Finlandia","Suecia","Países Bajos"]],["Canadá",10,12,["Canadá"]],["Japón",8,10,["Japón"]],["Australia / Singapur",8,10,["Australia","Singapur"]]];
 const NUCLEO = ["ENB.TO","TTE.PA","ALV.DE","CS.PA","ZURN.SW","NDA-FI.HE","D05.SI","NG.L","2914.T","TLS.AX"];
 const IRPF = .19;
+const BANDERA={"Canadá":"🇨🇦","Francia":"🇫🇷","Alemania":"🇩🇪","Suiza":"🇨🇭","Italia":"🇮🇹","Finlandia":"🇫🇮","Singapur":"🇸🇬","Reino Unido":"🇬🇧","Japón":"🇯🇵","Australia":"🇦🇺","Noruega":"🇳🇴","España":"🇪🇸","EE. UU.":"🇺🇸","Países Bajos":"🇳🇱","Suecia":"🇸🇪"};
+const fl = p=>(BANDERA[p]||"🏳️")+" "+p;
 
 // ====================== CÁLCULOS ======================
 const pts = (x,a,b,c)=>x==="v"?a:x==="a"?b:c;
@@ -328,8 +359,13 @@ EMPRESAS.forEach(e=>{
   e.pen = e.sig>=2?20:0;
   e.nota = Math.max(0,Math.min(100,e.rent+e.sost+e.crec-e.pen));
   e.sem = e.sig>=3||e.ver==="Trampa"?"r":e.nota>=70&&e.ver==="Sostenible"?"v":e.nota>=50?"a":"r"; // "Vigilar" nunca pasa de ámbar
-  e.sel = NUCLEO.includes(e.t);
 });
+// ranking: primero que rente 4-12%, luego semáforo (verde > ámbar > rojo), luego nota, luego rentabilidad neta
+const SEMORD={v:0,a:1,r:2};
+const enRango=e=>e.y>=4&&e.y<=12?0:1; // criterio del usuario: rentabilidad 4-12%
+function rankear(){EMPRESAS.slice().sort((a,b)=>enRango(a)-enRango(b)||SEMORD[a.sem]-SEMORD[b.sem]||b.nota-a.nota||b.y-a.y).forEach((e,i)=>e.rank=i+1)}
+rankear(); const TOP=20;
+EMPRESAS.forEach(e=>e.sel=e.rank<=TOP);
 const css = v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const SERIES = ()=>["--s1","--s2","--s3","--s4","--s5","--s6","--s7","--s8"].map(css);
 const VCOL = {Sostenible:"--ok",Vigilar:"--warn",Trampa:"--bad"};
@@ -366,7 +402,8 @@ function g1(){
   circular("c1","doughnut",arr);
   if(!s.length){n1.innerHTML="Selecciona alguna empresa.";return}
   const top=arr[0]; const pct=top[1]/s.length*100;
-  n1.innerHTML=`<b>Lectura:</b> ${s.length} empresas en ${new Set(s.map(e=>e.p)).size} países. El mayor peso es ${top[0]} (${fmtP(pct,0)}). ${pct>35?"Demasiado concentrado en un país: añade otras regiones.":"Buena diversificación geográfica: ningún país supera un tercio."} EE. UU.: 0% en esta lista.`;
+  const usSede=s.filter(e=>e.p==="EE. UU.").length/s.length*100, usVentas=s.reduce((a,e)=>a+e.us,0)/s.length;
+  n1.innerHTML=`<b>Lectura:</b> ${s.length} empresas con sede en ${new Set(s.map(e=>e.p)).size} países. Mayor peso: ${top[0]} (${fmtP(pct,0)}). Sede en EE. UU.: ${fmtP(usSede,0)}, pero por <b>ventas</b> tu exposición real a EE. UU. es ~${fmtP(usVentas,0)}: muchas europeas (BAT, National Grid, Zurich) venden mucho allí.`;
 }
 function g2(){
   const s=sel(); const arr=agrupar(s,"s",7);
@@ -379,7 +416,7 @@ function g3(){
   const only=document.getElementById("soloSel3").checked;
   const L=(only?sel():EMPRESAS).slice().sort((a,b)=>neta(b)-neta(a));
   document.getElementById("w3").style.height=Math.max(220,L.length*34+80)+"px";
-  const data={labels:L.map(e=>e.n),datasets:[
+  const data={labels:L.map(e=>`${BANDERA[e.p]||""} ${e.n}`),datasets:[
     {label:"Bruta",data:L.map(e=>+e.y.toFixed(2)),backgroundColor:css("--s1"),borderRadius:4,barPercentage:.9,categoryPercentage:.75},
     {label:"Neta para ti",data:L.map(e=>+neta(e).toFixed(2)),backgroundColor:css("--s2"),borderRadius:4,barPercentage:.9,categoryPercentage:.75}]};
   const opt={indexAxis:"y",plugins:{legend:{position:"top"},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${fmtP(c.raw,2)}`}}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+"%"},grid:{color:css("--line")}},y:{grid:{display:false}}}};
@@ -390,27 +427,32 @@ function g3(){
   n3.innerHTML=`<b>Lectura:</b> rentabilidad bruta media ${fmtP(avgB,2)} → neta ${fmtP(avgN,2)}. Mayor mordisco fiscal: ${worst.n} (${worst.p}), pierde ${fmtP(worst.y-neta(worst),2)}.`;
 }
 function g4(){
-  const L=EMPRESAS.slice().sort((a,b)=>b.nota-a.nota);
+  const L=EMPRESAS.slice().sort((a,b)=>a.rank-b.rank);
   document.getElementById("w4").style.height=Math.max(260,L.length*26+90)+"px";
-  const data={labels:L.map(e=>e.n),datasets:[
+  const data={labels:L.map(e=>`${e.rank}. ${BANDERA[e.p]||""} ${e.n}`),datasets:[
     {label:"Penalización trampa",data:L.map(e=>-e.pen),backgroundColor:css("--other"),borderRadius:4},
     {label:"Rentabilidad (25)",data:L.map(e=>e.rent),backgroundColor:css("--s1")},
     {label:"Sostenibilidad (45)",data:L.map(e=>e.sost),backgroundColor:css("--s2")},
     {label:"Crecimiento (30)",data:L.map(e=>e.crec),backgroundColor:css("--s3"),borderRadius:{topRight:4,bottomRight:4}}]};
+  const corte={id:"corte",afterDatasetsDraw(ch){const y=ch.scales.y,a=ch.chartArea,cx=ch.ctx;const py=(y.getPixelForValue(TOP-1)+y.getPixelForValue(TOP))/2;cx.save();cx.strokeStyle=css("--accent");cx.lineWidth=2;cx.beginPath();cx.moveTo(a.left-150,py);cx.lineTo(a.right,py);cx.stroke();cx.fillStyle=css("--accent");cx.font="bold 11px sans-serif";cx.fillText("▲ Top 20",a.right-60,py-4);cx.restore()}};
   const line={id:"umbral",afterDatasetsDraw(ch){const x=ch.scales.x,a=ch.chartArea,cx=ch.ctx;[[70,css("--ok")],[50,css("--warn")]].forEach(([v,c])=>{const px=x.getPixelForValue(v);cx.save();cx.strokeStyle=c;cx.setLineDash([5,4]);cx.lineWidth=1.5;cx.beginPath();cx.moveTo(px,a.top);cx.lineTo(px,a.bottom);cx.stroke();cx.fillStyle=c;cx.font="11px sans-serif";cx.fillText(v,px+3,a.top+10);cx.restore()})}};
-  C.c4=new Chart(c4,{type:"bar",data,plugins:[line],options:{indexAxis:"y",plugins:{legend:{position:"top",labels:{boxWidth:12}},tooltip:{mode:"index",callbacks:{footer:it=>"Nota final: "+L[it[0].dataIndex].nota}}},
+  C.c4=new Chart(c4,{type:"bar",data,plugins:[line,corte],options:{indexAxis:"y",plugins:{legend:{position:"top",labels:{boxWidth:12}},tooltip:{mode:"index",callbacks:{footer:it=>"Nota final: "+L[it[0].dataIndex].nota}}},
     scales:{x:{stacked:true,min:-20,max:100,ticks:{stepSize:10},grid:{color:css("--line")}},y:{stacked:true,grid:{display:false}}}}});
-  const v=L.filter(e=>e.sem==="v");
-  n4.innerHTML=`<b>Lectura:</b> ${v.length} empresas en verde (nota ≥ 70 y veredicto sostenible): ${v.slice(0,6).map(e=>e.n).join(", ")}${v.length>6?"…":""}. Líder: ${L[0].n} con ${L[0].nota}. Las tres trampas quedan al fondo por la penalización de −20.`;
+  const v=L.filter(e=>e.sem==="v"), us20=L.filter(e=>e.rank<=TOP&&e.p==="EE. UU.");
+  n4.innerHTML=`<b>Lectura:</b> ${v.length} empresas en verde (nota ≥ 70 y veredicto sostenible): ${v.slice(0,6).map(e=>e.n).join(", ")}${v.length>6?"…":""}. Número 1: ${L[0].n} con ${L[0].nota}. En el top 20 hay ${us20.length} de EE. UU. (${us20.map(e=>e.n).join(", ")||"ninguna"}). Las clásicas (P&amp;G, Coca-Cola, J&amp;J, McDonald's) quedan fuera porque rinden menos del 4%.`;
 }
 function g5(){
   const grupos=["Sostenible","Vigilar","Trampa"];
-  const ds=grupos.map(g=>({label:g,data:EMPRESAS.filter(e=>e.ver===g).map(e=>({x:e.po,y:e.y,r:4+e.nota/10,e})),backgroundColor:css(VCOL[g])+"cc",borderColor:css("--card"),borderWidth:2}));
-  const ref={id:"ref",beforeDatasetsDraw(ch){const x=ch.scales.x,a=ch.chartArea,cx=ch.ctx,px=x.getPixelForValue(80);cx.save();cx.fillStyle=css("--bad")+"14";cx.fillRect(px,a.top,a.right-px,a.bottom-a.top);cx.strokeStyle=css("--ink3");cx.setLineDash([5,4]);cx.beginPath();cx.moveTo(px,a.top);cx.lineTo(px,a.bottom);cx.stroke();cx.fillStyle=css("--ink3");cx.font="11px sans-serif";cx.fillText("80% payout",px+4,a.top+12);cx.restore()}};
-  const lab={id:"lab",afterDatasetsDraw(ch){const cx=ch.ctx;cx.save();cx.font="10px sans-serif";cx.fillStyle=css("--ink2");ch.data.datasets.forEach((d,i)=>{ch.getDatasetMeta(i).data.forEach((p,j)=>{const e=d.data[j].e;if(e.y>=6.5||e.po>=85||e.ver==="Trampa")cx.fillText(e.n.split(" ")[0],p.x+8,p.y+3)})});cx.restore()}};
+  const ds=grupos.map(g=>{const L=EMPRESAS.filter(e=>e.ver===g);return {label:g,data:L.map(e=>({x:e.po,y:e.y,r:4+e.nota/10,e})),pointStyle:L.map(e=>e.p==="EE. UU."?"triangle":"circle"),backgroundColor:css(VCOL[g])+"cc",borderColor:css("--card"),borderWidth:2}});
+  const ref={id:"ref",beforeDatasetsDraw(ch){const x=ch.scales.x,y=ch.scales.y,a=ch.chartArea,cx=ch.ctx,px=x.getPixelForValue(80);cx.save();
+    const zx1=x.getPixelForValue(40),zx2=x.getPixelForValue(75),zy1=y.getPixelForValue(9),zy2=y.getPixelForValue(5);
+    cx.fillStyle=css("--ok")+"26";cx.fillRect(zx1,zy1,zx2-zx1,zy2-zy1);cx.strokeStyle=css("--ok");cx.lineWidth=1.5;cx.setLineDash([]);cx.strokeRect(zx1,zy1,zx2-zx1,zy2-zy1);
+    cx.fillStyle=css("--ok");cx.font="bold 11px sans-serif";cx.fillText("★ ZONA ÓPTIMA",zx1+5,zy1+14);cx.font="10px sans-serif";cx.fillText("rent. 5-9% · payout 40-75%",zx1+5,zy1+27);cx.fillStyle=css("--bad")+"14";cx.fillRect(px,a.top,a.right-px,a.bottom-a.top);cx.strokeStyle=css("--ink3");cx.setLineDash([5,4]);cx.beginPath();cx.moveTo(px,a.top);cx.lineTo(px,a.bottom);cx.stroke();cx.fillStyle=css("--ink3");cx.font="11px sans-serif";cx.fillText("80% payout",px+4,a.top+12);cx.restore()}};
+  const lab={id:"lab",afterDatasetsDraw(ch){const cx=ch.ctx;cx.save();cx.font="10px sans-serif";cx.fillStyle=css("--ink2");ch.data.datasets.forEach((d,i)=>{ch.getDatasetMeta(i).data.forEach((p,j)=>{const e=d.data[j].e;if(e.y>=6.5||e.po>=85||e.ver==="Trampa"||e.y<3.5)cx.fillText((e.p==="EE. UU."?"▲":"")+e.n.split(" ")[0].replace("Procter","P&G").replace("Johnson","J&J").replace("Realty","Realty"),p.x+8,p.y+3)})});cx.restore()}};
   C.c5=new Chart(c5,{type:"bubble",data:{datasets:ds},plugins:[ref,lab],options:{plugins:{legend:{position:"top"},tooltip:{callbacks:{label:c=>{const e=c.raw.e;return ` ${e.n}: rent. ${fmtP(e.y)} · payout ${e.po}% (${e.pm}) · nota ${e.nota}`}}}},
-    scales:{x:{min:20,max:115,title:{display:true,text:"Payout % (sobre la métrica de su sector)"},ticks:{callback:v=>v+"%"},grid:{color:css("--line")}},y:{min:2,max:10.5,title:{display:true,text:"Rentabilidad bruta"},ticks:{callback:v=>v+"%"},grid:{color:css("--line")}}}}});
-  n5.innerHTML=`<b>Lectura:</b> las burbujas rojas (Mercedes, BCE, Telus) y Legal &amp; General son las de mayor rentabilidad, y por eso mismo las más dudosas. Arriba-izquierda (rentabilidad 5-6% con payout ≤ 65%) están TotalEnergies, Enbridge, AXA y Generali.`;
+    scales:{x:{min:20,max:115,title:{display:true,text:"Payout % (sobre la métrica de su sector)"},ticks:{callback:v=>v+"%"},grid:{color:css("--line")}},y:{min:1.5,max:10.5,title:{display:true,text:"Rentabilidad bruta"},ticks:{callback:v=>v+"%"},grid:{color:css("--line")}}}}});
+  const enZona=EMPRESAS.filter(e=>e.y>=5&&e.y<=9&&e.po>=40&&e.po<=75).sort((a,b)=>a.rank-b.rank), opt=enZona.filter(e=>e.ver!=="Trampa"), trZ=enZona.filter(e=>e.ver==="Trampa");
+  n5.innerHTML=`<b>Zona óptima (${opt.length}):</b> ${opt.map(e=>e.n+(e.p==="EE. UU."?" 🇺🇸":"")).join(", ")}.${trZ.length?" Ojo: "+trZ.map(e=>e.n).join(" y ")+" también caen en la zona, pero son trampas (ya recortaron): la zona no sustituye al semáforo.":""} Las burbujas rojas (Mercedes, BCE, Telus) y Legal &amp; General son las de mayor rentabilidad, y por eso mismo las más dudosas. Abajo a la izquierda quedan las clásicas de EE. UU. (P&amp;G, Coca-Cola, J&amp;J): muy seguras, pero rinden menos del 4%.`;
 }
 function g6(){
   const s=document.getElementById("selRadar"); const e=EMPRESAS.find(x=>x.t===s.value)||EMPRESAS[0];
@@ -418,7 +460,7 @@ function g6(){
   const f=x=>[x.rent/25*100,pts(x.pS,100,50,0),pts(x.cov,100,50,0),pts(x.debt,100,50,0),Math.min(100,x.yrs/20*100),x.cagr>7?100:x.cagr>=3?70:x.cagr>=0?30:0,x.pol==="prog"?100:x.pol==="pct"?60:30];
   const avg=dims.map((_,i)=>EMPRESAS.reduce((s,x)=>s+f(x)[i],0)/EMPRESAS.length);
   const data={labels:dims,datasets:[{label:e.n,data:f(e),borderColor:css("--s2"),backgroundColor:css("--s2")+"33",borderWidth:2,pointRadius:4,pointBackgroundColor:css("--s2")},
-    {label:"Media de las 25",data:avg,borderColor:css("--ink3"),borderDash:[5,4],backgroundColor:"transparent",borderWidth:1.5,pointRadius:0}]};
+    {label:"Media de todas",data:avg,borderColor:css("--ink3"),borderDash:[5,4],backgroundColor:"transparent",borderWidth:1.5,pointRadius:0}]};
   if(C.c6){C.c6.data=data;C.c6.update()}else C.c6=new Chart(c6,{type:"radar",data,options:{plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${Math.round(c.raw)}`}}},scales:{r:{min:0,max:100,ticks:{stepSize:25,backdropColor:"transparent"},grid:{color:css("--line")},angleLines:{color:css("--line")},pointLabels:{font:{size:11}}}}}});
   const v=f(e); const hi=dims[v.indexOf(Math.max(...v))], lo=dims[v.indexOf(Math.min(...v))];
   n6.innerHTML=`<b>${e.n}</b> (${e.p} · ${e.s}) · nota ${e.nota} · ${e.ver}. Punto fuerte: <b>${hi}</b>. Punto débil: <b>${lo}</b>. ${e.note}`;
@@ -442,7 +484,7 @@ function g8(){
     {type:"scatter",label:"Tu selección (si es el 50% de la cartera)",data:r2.map((v,i)=>({x:v,y:OBJETIVO[i][0]})),pointStyle:"rectRot",pointRadius:7,backgroundColor:css("--s2"),borderColor:css("--card"),borderWidth:2}]};
   const opt={indexAxis:"y",plugins:{legend:{position:"bottom",labels:{boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.type==="scatter"?` Tu selección: ${fmtP(c.raw.x,1)}`:` Objetivo: ${OBJETIVO[c.dataIndex][1]}-${OBJETIVO[c.dataIndex][2]}%`}}},scales:{x:{min:0,max:40,ticks:{callback:v=>v+"%"},grid:{color:css("--line")}},y:{type:"category",grid:{display:false}}}};
   if(C.c8){C.c8.data=data;C.c8.update()}else C.c8=new Chart(c8,{data,options:opt});
-  n8.innerHTML=`<b>Lectura:</b> el rombo supone que esta lista sea la mitad de tu cartera. EE. UU. queda en 0% aquí porque no hay valores estadounidenses: tu exposición actual a EE. UU. está fuera de esta lista y debería bajar hacia el 20-25%. Europa es la región con más peso objetivo.`;
+  n8.innerHTML=`<b>Lectura:</b> el rombo supone que esta selección sea la mitad de tu cartera (por país de sede). Recuerda sumar lo que ya tienes en EE. UU. fuera de esta lista: entre todo debería quedar en el 20-25%.`;
 }
 function g9(){
   const s=sel(); const y=s.length?s.reduce((a,e)=>a+neta(e),0)/s.length/100:0;
@@ -457,41 +499,54 @@ function g9(){
   if(C.c9){C.c9.data=data;C.c9.update()}else C.c9=new Chart(c9,{type:"line",data,options:opt});
   n9.innerHTML=`<b>Lectura:</b> con una rentabilidad neta media de ${fmtP(y*100,2)}, el primer año cobrarías ${eur(comp[0])} netos (${eur(comp[0]/12)}/mes). En el año 10: ${eur(comp[10])}/año frente a ${eur(base[10])} sin aportar ni reinvertir.`;
 }
+function g10(){
+  const L=sel().slice().sort((a,b)=>a.beta-b.beta);
+  document.getElementById("w10").style.height=Math.max(220,L.length*26+80)+"px";
+  const data={labels:L.map(e=>(BANDERA[e.p]||"")+" "+e.n),datasets:[{label:"Beta",data:L.map(e=>e.beta),backgroundColor:L.map(e=>e.beta<1?css("--s1"):css("--s2")),borderRadius:4}]};
+  const uno={id:"uno",afterDatasetsDraw(ch){const x=ch.scales.x,a=ch.chartArea,cx=ch.ctx,px=x.getPixelForValue(1);cx.save();cx.strokeStyle=css("--ink2");cx.setLineDash([5,4]);cx.beginPath();cx.moveTo(px,a.top);cx.lineTo(px,a.bottom);cx.stroke();cx.fillStyle=css("--ink2");cx.font="11px sans-serif";cx.fillText("mercado = 1",px+4,a.top+10);cx.restore()}};
+  const opt={indexAxis:"y",plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` Beta ${c.raw.toString().replace(".",",")}: si su mercado cae un 10%, tiende a caer un ${(c.raw*10).toFixed(1).replace(".",",")}%`}}},scales:{x:{min:0,max:1.4,ticks:{stepSize:.2},grid:{color:css("--line")}},y:{grid:{display:false}}}};
+  if(C.c10){C.c10.data=data;C.c10.resize();C.c10.update()}else C.c10=new Chart(c10,{type:"bar",data,options:opt,plugins:[uno]});
+  if(!L.length){n10.innerHTML="";return}
+  const m=L.reduce((a,e)=>a+e.beta,0)/L.length;
+  n10.innerHTML=`<b>Lectura:</b> beta media ${m.toFixed(2).replace(".",",")}${m<0.8?": cartera defensiva, debería caer menos que el mercado.":": algo sensible al mercado."} Más tranquila: ${L[0].n} (${String(L[0].beta).replace(".",",")}). Más volátil: ${L[L.length-1].n} (${String(L[L.length-1].beta).replace(".",",")}).`;
+}
 function kpis(){
   const s=sel(); const n=s.length;
   const yb=n?s.reduce((a,e)=>a+e.y,0)/n:0, yn=n?s.reduce((a,e)=>a+neta(e),0)/n:0, nota=n?s.reduce((a,e)=>a+e.nota,0)/n:0;
   const paises=new Set(s.map(e=>e.p)).size, div=new Set(s.map(e=>e.d)).size, tr=s.filter(e=>e.ver==="Trampa").length;
-  const K=[[n,"Empresas","seleccionadas de 25"],[fmtP(yb,2),"Rent. bruta media","pesos iguales"],[fmtP(yn,2),"Rent. neta media","tras retenciones e IRPF 19%"],[Math.round(nota),"Nota media","0-100 · verde ≥ 70"],
-    [paises,"Países","sin EE. UU."],[div,"Divisas","diversifican frente al dólar"],[s.filter(e=>e.ver==="Sostenible").length,"Sostenibles","según el informe"],[tr,"Trampas","en tu selección"+(tr?" ⚠":"")]];
+  const K=[[n,"Empresas","seleccionadas de "+EMPRESAS.length],[fmtP(yb,2),"Rent. bruta media","pesos iguales"],[fmtP(yn,2),"Rent. neta media","tras retenciones e IRPF 19%"],[Math.round(nota),"Nota media","0-100 · verde ≥ 70"],
+    [paises,"Países (sede)",fmtP(s.filter(e=>e.p==="EE. UU.").length/(n||1)*100,0)+" con sede en EE. UU."],[fmtP(n?s.reduce((a,e)=>a+e.us,0)/n:0,0),"Ventas reales en EE. UU.","exposición económica (aprox.)"],[(n?s.reduce((a,e)=>a+e.beta,0)/n:0).toFixed(2).replace(".",","),"Beta media","< 1 = se mueve menos que el mercado"],[div,"Divisas","de cotización"],[s.filter(e=>e.ver==="Sostenible").length,"Sostenibles","según el informe"],[tr,"Trampas","en tu selección"+(tr?" ⚠":"")]];
   kpisEl.innerHTML=K.map(k=>`<div class="kpi"><span>${k[1]}</span><b>${k[0]}</b><small>${k[2]}</small></div>`).join("");
 }
 
 // ====================== TABLA ======================
-const COLS=[["","sel"],["Empresa","n"],["Ticker","t"],["País","p"],["Sector","s"],["Rent. bruta","y",1],["Rent. neta","net",1],["Payout","po",1],["Métrica","pm"],["Años sin recorte","yrs",1],["Crec. div. 5a","cagr",1],["Nota","nota",1],["Veredicto","ver"],["Divisa","d"],["Pago","f"]];
-let orden={k:"nota",dir:-1};
+const COLS=[["","sel"],["#","rank",1],["Empresa","n"],["Ticker","t"],["País sede","p"],["Exposición por ventas","exp"],["Ventas EE. UU.","us",1],["Beta","beta",1],["Sector","s"],["Rent. bruta","y",1],["Rent. neta","net",1],["Payout","po",1],["Métrica","pm"],["Años sin recorte","yrs",1],["Crec. div. 5a","cagr",1],["Nota","nota",1],["Veredicto","ver"],["Divisa","d"],["Pago","f"]];
+let orden={k:"rank",dir:1};
 function tabla(){
   const fp=fPais.value, fv=fVer.value;
-  let L=EMPRESAS.filter(e=>(!fp||e.p===fp)&&(!fv||e.ver===fv)).map(e=>Object.assign(e,{net:neta(e)}));
+  const fu=document.getElementById("fUS").value;
+  let L=EMPRESAS.filter(e=>(!fp||e.p===fp)&&(!fv||e.ver===fv)&&(!fu||(fu==="si")===(e.p==="EE. UU."))).map(e=>Object.assign(e,{net:neta(e)}));
   L.sort((a,b)=>{const x=a[orden.k],y=b[orden.k];return (typeof x==="number"?x-y:String(x).localeCompare(String(y)))*orden.dir});
   tab.tHead.innerHTML="<tr>"+COLS.map(c=>`<th class="${c[2]?"n":""}" data-k="${c[1]}">${c[0]}${orden.k===c[1]?(orden.dir>0?" ▲":" ▼"):""}</th>`).join("")+"</tr>";
   const cls={Sostenible:"ok",Vigilar:"warn",Trampa:"bad"}, ico={Sostenible:"✓",Vigilar:"!",Trampa:"✕"};
   const sc=e=>e.sem==="v"?"var(--okbg)":e.sem==="a"?"var(--warnbg)":"var(--badbg)";
-  tab.tBodies[0].innerHTML=L.map(e=>`<tr class="${e.sel?"sel":""}"><td><input type="checkbox" data-t="${e.t}" ${e.sel?"checked":""} aria-label="Incluir ${e.n}"></td><td title="${e.note}"><b>${e.n}</b></td><td>${e.t}</td><td>${e.p}</td><td>${e.s}</td>
+  tab.tBodies[0].innerHTML=L.map(e=>`<tr class="${e.sel?"sel":""}"><td><input type="checkbox" data-t="${e.t}" ${e.sel?"checked":""} aria-label="Incluir ${e.n}"></td><td class="n"><b>${e.rank}</b></td><td title="${e.note}" style="white-space:normal;min-width:150px"><b>${e.n}</b><br><span class="hint">${fl(e.p)} · β ${String(e.beta).replace(".",",")} · ${fmtP(e.y)}</span></td><td>${e.t}</td><td><b>${fl(e.p)}</b></td><td style="white-space:normal;min-width:170px;font-size:12px">${e.exp}</td><td class="n">${e.us}%</td><td class="n">${String(e.beta).replace(".",",")}</td><td>${e.s}</td>
     <td class="n">${fmtP(e.y)}${e.nv?" <span class='hint'>n.v.</span>":""}</td><td class="n">${fmtP(e.net,2)}</td><td class="n">${e.po}%</td><td>${e.pm}</td><td class="n">${e.yrs}</td><td class="n">${e.cagr>0?"+":""}${e.cagr}%</td>
     <td class="n"><span class="score" style="background:${sc(e)}">${e.nota}</span></td><td><span class="pill ${cls[e.ver]}">${ico[e.ver]} ${e.ver}</span></td><td>${e.d}</td><td>${e.f}</td></tr>`).join("");
 }
 
 // ====================== EVENTOS ======================
+const n10=document.getElementById("n10"),c10=document.getElementById("c10");
 const n1=document.getElementById("n1"),n2=document.getElementById("n2"),n3=document.getElementById("n3"),n4=document.getElementById("n4"),n5=document.getElementById("n5"),n6=document.getElementById("n6"),n7=document.getElementById("n7"),n8=document.getElementById("n8"),n9=document.getElementById("n9");
 const kpisEl=document.getElementById("kpis"),capEl=document.getElementById("cap"),apoEl=document.getElementById("apo"),crecEl=document.getElementById("crec"),reinvEl=document.getElementById("reinv");
 const tab=document.getElementById("tab"),fPais=document.getElementById("fPais"),fVer=document.getElementById("fVer");
 [...new Set(EMPRESAS.map(e=>e.p))].sort().forEach(p=>fPais.add(new Option(p,p)));
 const sr=document.getElementById("selRadar");EMPRESAS.slice().sort((a,b)=>a.n.localeCompare(b.n)).forEach(e=>sr.add(new Option(`${e.n} (${e.p})`,e.t)));sr.value="TTE.PA";
-function refrescar(){kpis();g1();g2();g3();g7();g8();g9();tabla()}
-document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{const p=b.dataset.preset;EMPRESAS.forEach(e=>e.sel=p==="todas"||(p==="nucleo"&&NUCLEO.includes(e.t))||(p==="verde"&&e.sem==="v"));refrescar()});
+function refrescar(){kpis();g1();g2();g3();g7();g8();g9();g10();tabla()}
+document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{const p=b.dataset.preset;if(p==="sinus"){let k=0;EMPRESAS.slice().sort((a,b)=>a.rank-b.rank).forEach(e=>{e.sel=e.p!=="EE. UU."&&k<TOP;if(e.sel)k++})}else EMPRESAS.forEach(e=>e.sel=p==="todas"||(p==="top"&&e.rank<=TOP)||(p==="nucleo"&&NUCLEO.includes(e.t))||(p==="verde"&&e.sem==="v"));refrescar()});
 tab.addEventListener("change",ev=>{const t=ev.target.dataset.t;if(!t)return;EMPRESAS.find(e=>e.t===t).sel=ev.target.checked;refrescar()});
-tab.addEventListener("click",ev=>{const k=ev.target.closest("th")?.dataset.k;if(!k||k==="sel")return;orden=orden.k===k?{k,dir:-orden.dir}:{k,dir:["n","t","p","s","pm","ver","d","f"].includes(k)?1:-1};tabla()});
-fPais.onchange=fVer.onchange=tabla;
+tab.addEventListener("click",ev=>{const k=ev.target.closest("th")?.dataset.k;if(!k||k==="sel")return;orden=orden.k===k?{k,dir:-orden.dir}:{k,dir:["n","t","p","s","pm","ver","d","f","exp","rank","beta"].includes(k)?1:-1};tabla()});
+fPais.onchange=fVer.onchange=document.getElementById("fUS").onchange=tabla;
 document.getElementById("tramites").onchange=refrescar;
 document.getElementById("soloSel3").onchange=g3;
 sr.onchange=g6;[capEl,apoEl,crecEl,reinvEl].forEach(x=>x.oninput=g9);
