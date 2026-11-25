@@ -82,6 +82,18 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
 .two{display:flex;gap:8px;flex-wrap:wrap}
 .two>*{flex:1 1 140px}
 .hint{font-size:12px;color:var(--ink3)}
+.calgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:600px){.calgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.calgrid{grid-template-columns:repeat(4,1fr)}}
+.mes{border-radius:10px;padding:8px 9px;border:1px solid var(--line);min-height:92px}
+.mes h3{margin:0;font-size:13px;display:flex;justify-content:space-between;align-items:baseline}
+.mes h3 b{font-size:15px}
+.mes ul{margin:5px 0 0;padding:0;list-style:none;font-size:11.5px;line-height:1.35}
+.mes li{display:flex;justify-content:space-between;gap:6px}
+.mes li span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.mes li span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.mes.vacio{border:2px dashed var(--bad)}
+.mes.dark,.mes.dark .hint{color:#fff}
 </style>
 </head>
 <body>
@@ -90,7 +102,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
   <p>36 candidatas de 15 países (con una parte de EE. UU.) · rentabilidad objetivo 4-12%, sostenibilidad y crecimiento del dividendo · Datos aproximados a nov. 2026 · No es asesoramiento financiero</p>
 </header>
 <nav>
-  <a href="#resumen">Resumen</a><a href="#g1">Países</a><a href="#g2">Sectores</a><a href="#g3">Bruta vs neta</a><a href="#g4">Nota</a><a href="#g5">Payout</a><a href="#g6">Perfil</a><a href="#g10">Beta</a><a href="#g7">Fiscalidad</a><a href="#g8">Pesos</a><a href="#g9">Proyección</a><a href="#tabla">Tabla</a><a href="#guia">Guía</a>
+  <a href="#resumen">Resumen</a><a href="#g1">Países</a><a href="#g2">Sectores</a><a href="#g3">Bruta vs neta</a><a href="#g4">Nota</a><a href="#g5">Payout</a><a href="#g6">Perfil</a><a href="#g10">Beta</a><a href="#g7">Fiscalidad</a><a href="#g8">Pesos</a><a href="#g9">Proyección</a><a href="#cal">Calendario</a><a href="#tabla">Tabla</a><a href="#guia">Guía</a>
 </nav>
 <main class="grid">
 
@@ -250,6 +262,37 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
   </dl></details>
 </section>
 
+<section id="cal" class="card">
+  <span class="tag">Gráfico 11 · Columnas apiladas por mes</span>
+  <h2>📅 Calendario de dividendos: ¿cobras todos los meses?</h2>
+  <p class="sub">Dividendos netos que cobrarías cada mes con tu selección, repartiendo a partes iguales el capital del simulador de 10 años (gráfico 9). Colores = región de la empresa.</p>
+  <div class="controls two">
+    <label class="hint">Capital para el calendario (€)<br><input type="number" id="capCal" value="20000" step="1000" min="0"></label>
+    <button id="rellenar" class="primary" style="align-self:end">Rellenar meses flojos</button>
+    <button id="deshacer" style="align-self:end">Volver al top 20</button>
+  </div>
+  <div class="chart"><canvas id="c11"></canvas></div>
+  <p class="now" id="n11"></p>
+  <details><summary>Cómo leer columnas apiladas por mes</summary><dl class="how">
+    <dt>Qué es</dt><dd>Una columna por mes; su altura total es lo que cobras ese mes. Cada tramo de color es lo que aporta una región.</dd>
+    <dt>Cómo se lee</dt><dd>Busca columnas parecidas entre sí: eso es una renta regular. Un mes muy alto (mayo, por los dividendos anuales europeos) y otros muy bajos significan ingresos a golpes. La línea discontinua es la media mensual: lo ideal es que todas las columnas queden cerca de ella.</dd>
+    <dt>Error típico</dt><dd>Creer que el mes es exacto. Las empresas cambian fechas, el bróker tarda unos días y el dividendo de diciembre puede llegar en enero. Úsalo para el reparto aproximado del año, no para planificar un pago concreto.</dd>
+  </dl></details>
+</section>
+
+<section id="cal2" class="card">
+  <span class="tag">Gráfico 12 · Calendario (mapa de calor)</span>
+  <h2>Quién te paga cada mes</h2>
+  <p class="sub">Cada casilla es un mes. Cuanto más intenso el azul, más cobras. Dentro, las empresas que pagan ese mes y su importe neto aproximado.</p>
+  <div id="calGrid" class="calgrid"></div>
+  <p class="now" id="n12"></p>
+  <details><summary>Cómo leer un calendario de calor</summary><dl class="how">
+    <dt>Qué es</dt><dd>Una tabla con forma de calendario donde el color sustituye al número: claro = poco, oscuro = mucho. Es un solo tono de azul porque mide cantidad, no categorías.</dd>
+    <dt>Cómo se lee</dt><dd>De un vistazo ves los meses flojos (casillas claras) y los fuertes (oscuras). Las casillas con borde rojo no tienen ningún cobro. Debajo de cada mes tienes la lista de pagadores para saber qué empresa añadir o quitar.</dd>
+    <dt>Error típico</dt><dd>Comparar matices parecidos de color: para importes exactos, lee la cifra escrita en la casilla.</dd>
+  </dl></details>
+</section>
+
 <section id="tabla" class="card">
   <span class="tag">Datos</span>
   <h2>Tabla de candidatas</h2>
@@ -260,7 +303,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
     <span class="hint">Toca una cabecera para ordenar · casilla = entra en tu cartera</span>
   </div>
   <div class="tablewrap"><table id="tab"><thead></thead><tbody></tbody></table></div>
-  <p class="legend-note"># = posición en el ranking (rentabilidad 4-12%, semáforo y nota). País sede = dónde cotiza y tributa el dividendo; exposición = de dónde vienen sus ventas (aprox.). Beta aproximada a 5 años frente a su mercado local. EE. UU.: retención del 15% recuperable entera con el formulario W-8BEN (sin él, 30%). Rent. neta = bruta × (1 − 19% IRPF − retención no recuperable). Payout sobre la métrica de su sector (beneficio, FCF, DCF o beneficio + capital). «n.v.»: no verificado en el informe, valor estimado. Ratings aproximados.</p>
+  <p class="legend-note"># = posición en el ranking (rentabilidad 4-12%, semáforo y nota). País sede = dónde cotiza y tributa el dividendo; exposición = de dónde vienen sus ventas (aprox.). Beta aproximada a 5 años frente a su mercado local. EE. UU.: retención del 15% recuperable entera con el formulario W-8BEN (sin él, 30%). Rent. neta = bruta × (1 − 19% IRPF − retención no recuperable). Payout sobre la métrica de su sector (beneficio, FCF, DCF o beneficio + capital). «n.v.»: no verificado en el informe, valor estimado. Ratings aproximados. Meses de cobro habituales (fecha de pago, no ex-dividendo), aproximados.</p>
 </section>
 
 <section id="guia" class="card">
@@ -277,6 +320,7 @@ footer{max-width:1100px;margin:16px auto 0;padding:0 14px;font-size:12px;color:v
       <tr><td><b>Dispersión</b></td><td>Relación entre dos medidas, casos raros</td><td>Posición (x, y); tamaño = 3ª medida</td><td>Confundir correlación con causa</td></tr>
       <tr><td><b>Barras + línea de referencia</b></td><td>Comparar con un valor clave (beta 1)</td><td>A qué lado de la línea cae cada barra</td><td>Olvidar qué significa la referencia</td></tr>
       <tr><td><b>Radar</b></td><td>Perfil de un elemento en varios criterios</td><td>Más lejos del centro = mejor</td><td>Fiarse del área</td></tr>
+      <tr><td><b>Calendario de calor</b></td><td>Ver en qué meses se concentra algo</td><td>Claro = poco, oscuro = mucho</td><td>Comparar matices parecidos</td></tr>
       <tr><td><b>Líneas</b></td><td>Evolución en el tiempo</td><td>La pendiente es la velocidad</td><td>Tomar una simulación por previsión</td></tr>
     </tbody>
   </table></div>
@@ -346,6 +390,17 @@ const RETENCION = {"Reino Unido":[0,0],"Francia":[0,0],"Países Bajos":[0,0],"Al
 const OBJETIVO = [["EE. UU.",20,25,["EE. UU."]],["España (Ibex)",15,15,["España"]],["Europa ex-España",30,35,["Reino Unido","Francia","Alemania","Italia","Suiza","Noruega","Finlandia","Suecia","Países Bajos"]],["Canadá",10,12,["Canadá"]],["Japón",8,10,["Japón"]],["Australia / Singapur",8,10,["Australia","Singapur"]]];
 const NUCLEO = ["ENB.TO","TTE.PA","ALV.DE","CS.PA","ZURN.SW","NDA-FI.HE","D05.SI","NG.L","2914.T","TLS.AX"];
 const IRPF = .19;
+// Meses habituales de COBRO (no fecha ex-dividendo). [mes, peso]: peso = parte del dividendo anual. Aproximados: verificar en la web de cada empresa.
+const Q=(a,b,c,d)=>[[a,.25],[b,.25],[c,.25],[d,.25]], H=(a,b,pa=.5)=>[[a,pa],[b,1-pa]], A=m=>[[m,1]];
+const PAGOS={
+ "CS.PA":A(5),"G.MI":A(5),"SREN.SW":A(4),"TTE.PA":Q(1,4,7,10),"O":[...Array(12)].map((_,i)=>[i+1,1/12]),"ALV.DE":A(5),"ENB.TO":Q(3,6,9,12),
+ "VZ":Q(2,5,8,11),"D05.SI":Q(4,5,8,11),"PEP":Q(1,3,6,9),"NDA-FI.HE":H(4,10),"ZURN.SW":A(4),"NG.L":H(1,7,.34),"2914.T":H(3,9),"MO":Q(1,4,7,10),
+ "ENEL.MI":H(1,7),"RIO.L":H(4,9,.55),"PFE":Q(3,6,9,12),"BATS.L":Q(2,5,8,11),"LGEN.L":H(6,9,.71),"TLS.AX":H(3,9),"SAMPO.HE":A(5),"BHP.AX":H(3,9),
+ "BCE.TO":Q(1,4,7,10),"T.TO":Q(1,4,7,10),"MBG.DE":A(5),"8058.T":H(6,12),"PG":Q(2,5,8,11),"JNJ":Q(3,6,9,12),"CVX":Q(3,6,9,12),"KO":Q(4,7,10,12),
+ "BNS.TO":Q(1,4,7,10),"EQNR.OL":Q(2,5,8,11),"MCD":Q(3,6,9,12),"IBE.MC":H(1,7,.35),"IBM":Q(3,6,9,12)};
+const MESES=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+const MESL=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const REGION=p=>p==="EE. UU."?"EE. UU.":p==="Canadá"?"Canadá":["Japón","Australia","Singapur"].includes(p)?"Asia-Pacífico":"Europa";
 const BANDERA={"Canadá":"🇨🇦","Francia":"🇫🇷","Alemania":"🇩🇪","Suiza":"🇨🇭","Italia":"🇮🇹","Finlandia":"🇫🇮","Singapur":"🇸🇬","Reino Unido":"🇬🇧","Japón":"🇯🇵","Australia":"🇦🇺","Noruega":"🇳🇴","España":"🇪🇸","EE. UU.":"🇺🇸","Países Bajos":"🇳🇱","Suecia":"🇸🇪"};
 const fl = p=>(BANDERA[p]||"🏳️")+" "+p;
 
@@ -353,6 +408,7 @@ const fl = p=>(BANDERA[p]||"🏳️")+" "+p;
 const pts = (x,a,b,c)=>x==="v"?a:x==="a"?b:c;
 function notaRent(y){return y<4||y>12?0:y<5?15:y<7?25:y<9?20:8}
 EMPRESAS.forEach(e=>{
+  e.mesesTxt=(PAGOS[e.t]||[]).map(x=>String(x[0]).padStart(2,"0")).join(",");
   e.rent = notaRent(e.y);
   e.sost = pts(e.pS,12,6,0)+pts(e.cov,10,5,0)+pts(e.debt,10,5,0)+(e.yrs>10?8:e.yrs>=5?4:0)+(e.rat==="A"?5:e.rat==="BBB"?3:0);
   e.crec = (e.cagr>7?10:e.cagr>=3?7:e.cagr>=0?3:0)+(e.eps==="alto"?10:e.eps==="medio"?5:0)+(e.pol==="prog"?10:e.pol==="pct"?6:3);
@@ -510,6 +566,46 @@ function g10(){
   const m=L.reduce((a,e)=>a+e.beta,0)/L.length;
   n10.innerHTML=`<b>Lectura:</b> beta media ${m.toFixed(2).replace(".",",")}${m<0.8?": cartera defensiva, debería caer menos que el mercado.":": algo sensible al mercado."} Más tranquila: ${L[0].n} (${String(L[0].beta).replace(".",",")}). Más volátil: ${L[L.length-1].n} (${String(L[L.length-1].beta).replace(".",",")}).`;
 }
+function cobrosMes(){
+  const s=sel(), cap=+document.getElementById("capCal").value||0, porEmp=s.length?cap/s.length:0;
+  const meses=MESES.map(()=>({tot:0,reg:{},emp:[]}));
+  s.forEach(e=>{const anual=porEmp*neta(e)/100;(PAGOS[e.t]||[]).forEach(([m,w])=>{const v=anual*w,M=meses[m-1];M.tot+=v;const r=REGION(e.p);M.reg[r]=(M.reg[r]||0)+v;M.emp.push([e,v])})});
+  return meses;
+}
+function g11(){
+  const M=cobrosMes(), regs=["Europa","EE. UU.","Canadá","Asia-Pacífico"], cols=[css("--s1"),css("--s2"),css("--s3"),css("--s4")];
+  const media=M.reduce((a,m)=>a+m.tot,0)/12;
+  const data={labels:MESES,datasets:regs.map((r,i)=>({label:r,data:M.map(m=>Math.round(m.reg[r]||0)),backgroundColor:cols[i],borderColor:css("--card"),borderWidth:{top:2}}))};
+  const ref={id:"media",afterDatasetsDraw(ch){const y=ch.scales.y,a=ch.chartArea,cx=ch.ctx,py=y.getPixelForValue(media);cx.save();cx.strokeStyle=css("--ink2");cx.setLineDash([5,4]);cx.beginPath();cx.moveTo(a.left,py);cx.lineTo(a.right,py);cx.stroke();cx.fillStyle=css("--ink2");cx.font="11px sans-serif";cx.fillText("media "+eur(media),a.left+4,py-4);cx.restore()}};
+  const opt={plugins:{legend:{position:"bottom",labels:{boxWidth:12}},tooltip:{mode:"index",callbacks:{label:c=>c.raw?` ${c.dataset.label}: ${eur(c.raw)}`:null,footer:it=>"Total del mes: "+eur(M[it[0].dataIndex].tot)}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,ticks:{callback:v=>v+" €"},grid:{color:css("--line")}}}};
+  if(C.c11)C.c11.destroy(); C.c11=new Chart(c11,{type:"bar",data,options:opt,plugins:[ref]});
+  const vacios=M.map((m,i)=>m.tot<1?MESL[i]:null).filter(Boolean), tot=M.reduce((a,m)=>a+m.tot,0);
+  const mx=M.reduce((b,m,i)=>m.tot>M[b].tot?i:b,0), mn=M.reduce((b,m,i)=>m.tot<M[b].tot?i:b,0);
+  n11.innerHTML=`<b>Lectura:</b> cobrarías ~${eur(tot)} netos al año (${eur(media)}/mes de media). ${vacios.length?`<b>Meses sin cobro:</b> ${vacios.join(", ")}.`:"Cobras <b>todos los meses</b>."} Mes más fuerte: ${MESL[mx]} (${eur(M[mx].tot)}); más flojo: ${MESL[mn]} (${eur(M[mn].tot)}).`;
+}
+function g12(){
+  const M=cobrosMes(), mx=Math.max(1,...M.map(m=>m.tot)), media=M.reduce((a,m)=>a+m.tot,0)/12;
+  // rampa secuencial de un solo tono (azul)
+  const tono=f=>`color-mix(in srgb, var(--s1) ${Math.round(8+f*82)}%, var(--card))`;
+  document.getElementById("calGrid").innerHTML=M.map((m,i)=>{const f=m.tot/mx;const dark=f>.55;
+    const lista=m.emp.sort((a,b)=>b[1]-a[1]).map(([e,v])=>`<li><span>${BANDERA[e.p]||""} ${e.n}</span><span>${eur(v)}</span></li>`).join("");
+    return `<div class="mes ${m.tot<1?"vacio":""} ${dark?"dark":""}" style="background:${m.tot<1?"var(--card)":tono(f)}"><h3><span>${MESES[i]}</span><b>${eur(m.tot)}</b></h3><ul>${lista||'<li class="hint">Sin cobros</li>'}</ul></div>`}).join("");
+  // sugerencias para los meses flojos
+  const flojos=M.map((m,i)=>[i,m.tot]).filter(x=>x[1]<media*0.6).map(x=>x[0]);
+  const sug=flojos.map(i=>{const c=candidataMes(i);return c?`${MESL[i]} → ${c.n} (${BANDERA[c.p]||""} nota ${c.nota}, ${fmtP(c.y)}${c.y<4?", rinde menos del 4%":""})`:null}).filter(Boolean);
+  n12.innerHTML=flojos.length?`<b>Meses flojos</b> (por debajo del 60% de la media): ${flojos.map(i=>MESL[i]).join(", ")}. Candidatas que pagan en ellos y no tienes: ${sug.join(" · ")||"ninguna que cumpla los criterios"}.${sug.length?" Pulsa «Rellenar meses flojos» para añadirlas (el capital se reparte entre más empresas).":""}`:"<b>Reparto equilibrado:</b> ningún mes queda por debajo del 60% de la media.";
+}
+// candidata para un mes: no seleccionada, no trampa ni roja; primero las que rentan 4-12%, luego por ranking
+function candidataMes(i){return EMPRESAS.filter(e=>!e.sel&&e.sem!=="r"&&e.ver!=="Trampa"&&(PAGOS[e.t]||[]).some(([m])=>m===i+1)).sort((a,b)=>enRango(a)-enRango(b)||a.rank-b.rank)[0]}
+function rellenar(){
+  for(let k=0;k<6;k++){
+    const M=cobrosMes(), media=M.reduce((a,m)=>a+m.tot,0)/12;
+    const i=M.reduce((b,m,j)=>m.tot<M[b].tot?j:b,0); if(M[i].tot>=media*0.6)break;
+    const c=candidataMes(i);
+    if(!c)break; c.sel=true;
+  }
+  refrescar();
+}
 function kpis(){
   const s=sel(); const n=s.length;
   const yb=n?s.reduce((a,e)=>a+e.y,0)/n:0, yn=n?s.reduce((a,e)=>a+neta(e),0)/n:0, nota=n?s.reduce((a,e)=>a+e.nota,0)/n:0;
@@ -520,7 +616,7 @@ function kpis(){
 }
 
 // ====================== TABLA ======================
-const COLS=[["","sel"],["#","rank",1],["Empresa","n"],["Ticker","t"],["País sede","p"],["Exposición por ventas","exp"],["Ventas EE. UU.","us",1],["Beta","beta",1],["Sector","s"],["Rent. bruta","y",1],["Rent. neta","net",1],["Payout","po",1],["Métrica","pm"],["Años sin recorte","yrs",1],["Crec. div. 5a","cagr",1],["Nota","nota",1],["Veredicto","ver"],["Divisa","d"],["Pago","f"]];
+const COLS=[["","sel"],["#","rank",1],["Empresa","n"],["Ticker","t"],["País sede","p"],["Exposición por ventas","exp"],["Ventas EE. UU.","us",1],["Beta","beta",1],["Sector","s"],["Rent. bruta","y",1],["Rent. neta","net",1],["Payout","po",1],["Métrica","pm"],["Años sin recorte","yrs",1],["Crec. div. 5a","cagr",1],["Nota","nota",1],["Veredicto","ver"],["Divisa","d"],["Pago","f"],["Meses de cobro","mesesTxt"]];
 let orden={k:"rank",dir:1};
 function tabla(){
   const fp=fPais.value, fv=fVer.value;
@@ -532,24 +628,28 @@ function tabla(){
   const sc=e=>e.sem==="v"?"var(--okbg)":e.sem==="a"?"var(--warnbg)":"var(--badbg)";
   tab.tBodies[0].innerHTML=L.map(e=>`<tr class="${e.sel?"sel":""}"><td><input type="checkbox" data-t="${e.t}" ${e.sel?"checked":""} aria-label="Incluir ${e.n}"></td><td class="n"><b>${e.rank}</b></td><td title="${e.note}" style="white-space:normal;min-width:150px"><b>${e.n}</b><br><span class="hint">${fl(e.p)} · β ${String(e.beta).replace(".",",")} · ${fmtP(e.y)}</span></td><td>${e.t}</td><td><b>${fl(e.p)}</b></td><td style="white-space:normal;min-width:170px;font-size:12px">${e.exp}</td><td class="n">${e.us}%</td><td class="n">${String(e.beta).replace(".",",")}</td><td>${e.s}</td>
     <td class="n">${fmtP(e.y)}${e.nv?" <span class='hint'>n.v.</span>":""}</td><td class="n">${fmtP(e.net,2)}</td><td class="n">${e.po}%</td><td>${e.pm}</td><td class="n">${e.yrs}</td><td class="n">${e.cagr>0?"+":""}${e.cagr}%</td>
-    <td class="n"><span class="score" style="background:${sc(e)}">${e.nota}</span></td><td><span class="pill ${cls[e.ver]}">${ico[e.ver]} ${e.ver}</span></td><td>${e.d}</td><td>${e.f}</td></tr>`).join("");
+    <td class="n"><span class="score" style="background:${sc(e)}">${e.nota}</span></td><td><span class="pill ${cls[e.ver]}">${ico[e.ver]} ${e.ver}</span></td><td>${e.d}</td><td>${e.f}</td><td>${(PAGOS[e.t]||[]).length===12?"Todos":(PAGOS[e.t]||[]).map(x=>MESES[x[0]-1]).join(", ")}</td></tr>`).join("");
 }
 
 // ====================== EVENTOS ======================
+const n11=document.getElementById("n11"),n12=document.getElementById("n12"),c11=document.getElementById("c11");
 const n10=document.getElementById("n10"),c10=document.getElementById("c10");
 const n1=document.getElementById("n1"),n2=document.getElementById("n2"),n3=document.getElementById("n3"),n4=document.getElementById("n4"),n5=document.getElementById("n5"),n6=document.getElementById("n6"),n7=document.getElementById("n7"),n8=document.getElementById("n8"),n9=document.getElementById("n9");
 const kpisEl=document.getElementById("kpis"),capEl=document.getElementById("cap"),apoEl=document.getElementById("apo"),crecEl=document.getElementById("crec"),reinvEl=document.getElementById("reinv");
 const tab=document.getElementById("tab"),fPais=document.getElementById("fPais"),fVer=document.getElementById("fVer");
 [...new Set(EMPRESAS.map(e=>e.p))].sort().forEach(p=>fPais.add(new Option(p,p)));
 const sr=document.getElementById("selRadar");EMPRESAS.slice().sort((a,b)=>a.n.localeCompare(b.n)).forEach(e=>sr.add(new Option(`${e.n} (${e.p})`,e.t)));sr.value="TTE.PA";
-function refrescar(){kpis();g1();g2();g3();g7();g8();g9();g10();tabla()}
+function refrescar(){kpis();g1();g2();g3();g7();g8();g9();g10();g11();g12();tabla()}
 document.querySelectorAll("[data-preset]").forEach(b=>b.onclick=()=>{const p=b.dataset.preset;if(p==="sinus"){let k=0;EMPRESAS.slice().sort((a,b)=>a.rank-b.rank).forEach(e=>{e.sel=e.p!=="EE. UU."&&k<TOP;if(e.sel)k++})}else EMPRESAS.forEach(e=>e.sel=p==="todas"||(p==="top"&&e.rank<=TOP)||(p==="nucleo"&&NUCLEO.includes(e.t))||(p==="verde"&&e.sem==="v"));refrescar()});
 tab.addEventListener("change",ev=>{const t=ev.target.dataset.t;if(!t)return;EMPRESAS.find(e=>e.t===t).sel=ev.target.checked;refrescar()});
 tab.addEventListener("click",ev=>{const k=ev.target.closest("th")?.dataset.k;if(!k||k==="sel")return;orden=orden.k===k?{k,dir:-orden.dir}:{k,dir:["n","t","p","s","pm","ver","d","f","exp","rank","beta"].includes(k)?1:-1};tabla()});
 fPais.onchange=fVer.onchange=document.getElementById("fUS").onchange=tabla;
 document.getElementById("tramites").onchange=refrescar;
 document.getElementById("soloSel3").onchange=g3;
-sr.onchange=g6;[capEl,apoEl,crecEl,reinvEl].forEach(x=>x.oninput=g9);
+sr.onchange=g6;
+document.getElementById("capCal").oninput=()=>{g11();g12()};
+document.getElementById("rellenar").onclick=rellenar;
+document.getElementById("deshacer").onclick=()=>{EMPRESAS.forEach(e=>e.sel=e.rank<=TOP);refrescar()};[capEl,apoEl,crecEl,reinvEl].forEach(x=>x.oninput=g9);
 refrescar();g4();g5();g6();
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>location.reload());
 </script>
